@@ -1,7 +1,204 @@
 {
   "version": 1,
-  "projects": {},
+  "projects": {
+    "dto": {
+      "root": "libs/dto",
+      "sourceRoot": "libs/dto/src",
+      "projectType": "library",
+      "schematics": {},
+      "architect": {
+        "lint": {
+          "builder": "@nrwl/linter:lint",
+          "options": {
+            "linter": "eslint",
+            "tsConfig": [
+              "libs/dto/tsconfig.lib.json",
+              "libs/dto/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!libs/dto/**/*"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/dto/jest.config.js",
+            "tsConfig": "libs/dto/tsconfig.spec.json",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "services-product": {
+      "root": "apps/services/product",
+      "sourceRoot": "apps/services/product/src",
+      "projectType": "application",
+      "prefix": "services-product",
+      "schematics": {},
+      "architect": {
+        "build": {
+          "builder": "@nrwl/node:build",
+          "options": {
+            "outputPath": "dist/apps/services/product",
+            "main": "apps/services/product/src/main.ts",
+            "tsConfig": "apps/services/product/tsconfig.app.json",
+            "assets": ["apps/services/product/src/assets"]
+          },
+          "configurations": {
+            "production": {
+              "optimization": true,
+              "extractLicenses": true,
+              "inspect": false,
+              "fileReplacements": [
+                {
+                  "replace": "apps/services/product/src/environments/environment.ts",
+                  "with": "apps/services/product/src/environments/environment.prod.ts"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@nrwl/node:execute",
+          "options": {
+            "buildTarget": "services-product:build"
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:lint",
+          "options": {
+            "linter": "eslint",
+            "tsConfig": [
+              "apps/services/product/tsconfig.app.json",
+              "apps/services/product/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!apps/services/product/**/*"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "apps/services/product/jest.config.js",
+            "tsConfig": "apps/services/product/tsconfig.spec.json",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "gateway-ecom": {
+      "root": "apps/gateway/ecom",
+      "sourceRoot": "apps/gateway/ecom/src",
+      "projectType": "application",
+      "prefix": "gateway-ecom",
+      "schematics": {},
+      "architect": {
+        "build": {
+          "builder": "@nrwl/node:build",
+          "options": {
+            "outputPath": "dist/apps/gateway/ecom",
+            "main": "apps/gateway/ecom/src/main.ts",
+            "tsConfig": "apps/gateway/ecom/tsconfig.app.json",
+            "assets": ["apps/gateway/ecom/src/assets"]
+          },
+          "configurations": {
+            "production": {
+              "optimization": true,
+              "extractLicenses": true,
+              "inspect": false,
+              "fileReplacements": [
+                {
+                  "replace": "apps/gateway/ecom/src/environments/environment.ts",
+                  "with": "apps/gateway/ecom/src/environments/environment.prod.ts"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@nrwl/node:execute",
+          "options": {
+            "buildTarget": "gateway-ecom:build"
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:lint",
+          "options": {
+            "linter": "eslint",
+            "tsConfig": [
+              "apps/gateway/ecom/tsconfig.app.json",
+              "apps/gateway/ecom/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!apps/gateway/ecom/**/*"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "apps/gateway/ecom/jest.config.js",
+            "tsConfig": "apps/gateway/ecom/tsconfig.spec.json",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "services-cart": {
+      "root": "apps/services/cart",
+      "sourceRoot": "apps/services/cart/src",
+      "projectType": "application",
+      "prefix": "services-cart",
+      "schematics": {},
+      "architect": {
+        "build": {
+          "builder": "@nrwl/node:build",
+          "options": {
+            "outputPath": "dist/apps/services/cart",
+            "main": "apps/services/cart/src/main.ts",
+            "tsConfig": "apps/services/cart/tsconfig.app.json",
+            "assets": ["apps/services/cart/src/assets"]
+          },
+          "configurations": {
+            "production": {
+              "optimization": true,
+              "extractLicenses": true,
+              "inspect": false,
+              "fileReplacements": [
+                {
+                  "replace": "apps/services/cart/src/environments/environment.ts",
+                  "with": "apps/services/cart/src/environments/environment.prod.ts"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@nrwl/node:execute",
+          "options": {
+            "buildTarget": "services-cart:build"
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:lint",
+          "options": {
+            "linter": "eslint",
+            "tsConfig": [
+              "apps/services/cart/tsconfig.app.json",
+              "apps/services/cart/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!apps/services/cart/**/*"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "apps/services/cart/jest.config.js",
+            "tsConfig": "apps/services/cart/tsconfig.spec.json",
+            "passWithNoTests": true
+          }
+        }
+      }
+    }
+  },
   "cli": {
-    "defaultCollection": "@nrwl/workspace"
-  }
+    "defaultCollection": "@nrwl/nest"
+  },
+  "defaultProject": "services-product"
 }

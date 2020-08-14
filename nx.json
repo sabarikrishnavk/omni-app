@@ -21,5 +21,18 @@
       }
     }
   },
-  "projects": {}
+  "projects": {
+    "dto": {
+      "tags": []
+    },
+    "services-product": {
+      "tags": []
+    },
+    "gateway-ecom": {
+      "tags": []
+    },
+    "services-cart": {
+      "tags": []
+    }
+  }
 }
