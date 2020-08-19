@@ -1,16 +1,26 @@
 import { Module } from '@nestjs/common';
+import { TypeOrmModule } from '@nestjs/typeorm';
 import { GraphQLFederationModule } from '@nestjs/graphql';
- 
-import { CartResolver } from './cart.resolver';
-import { CartService} from './cart.service';
 
-@Module({
+import { CartModule} from './cart.module';
+import { Cart } from './cart.entity';
+
+@Module({ 
   imports: [
     GraphQLFederationModule.forRoot({
       autoSchemaFile: true //'cart-schema.gql'
-    })
-  ], 
-  providers: [CartResolver,CartService],
-  exports: [CartService]
+    }), 
+    TypeOrmModule.forRoot({
+      type: 'postgres',
+      host: 'localhost',
+      port: 5432,
+      username: 'testuser',
+      password: 'password',
+      database: 'testdb',
+      entities: [Cart],
+      synchronize: true,
+    }) ,
+    CartModule
+  ]
 })
 export class AppModule {}

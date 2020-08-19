@@ -1,38 +1,14 @@
 
-// import { InputType,ObjectType, Field } from "@nestjs/graphql";
+import { Entity, Column } from 'typeorm';
 
-// @InputType() 
-// class Charge { 
-//     @Field()
-//     skucharge: number  = 0;
-//     @Field()
-//     shipping: number   = 0;
-//     @Field()
-//     discount?: number   = 0;
-//     @Field()
-//     tax?: number        = 0;
-//     @Field()
-//     total?: number      = 0;  
-// }
-// @InputType() 
-// export class CartItem { 
-//     @Field()
-//     id?: string;
+import { BaseEntity} from './base.entity';
 
-//     @Field()
-//     sku?: string;
-    
-//     @Field()
-//     quantity?: number;
+@Entity({ name: 'cart' })
+export class Cart extends BaseEntity{ 
 
-//     @Field()
-//     unitprice?: number;
+  @Column({ type: 'varchar', length: 300 })
+  store: string;
 
-//     attributes?: Map<string,string>; //cart item attributes 
-//     skuattributes? :Map<string,string>; //cart item attributes 
-
-
-//     @Field(type => Charge)
-//     charge?: Charge = new Charge();
- 
-// }
+  @Column({ type: 'varchar', length: 300 })
+  description: string;
+}
