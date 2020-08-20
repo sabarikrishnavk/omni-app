@@ -33,6 +33,9 @@
     },
     "services-cart": {
       "tags": []
+    },
+    "services-promotion": {
+      "tags": []
     }
   }
 }

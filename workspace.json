@@ -195,6 +195,62 @@
           }
         }
       }
+    },
+    "services-promotion": {
+      "root": "apps/services/promotion",
+      "sourceRoot": "apps/services/promotion/src",
+      "projectType": "application",
+      "prefix": "services-promotion",
+      "schematics": {},
+      "architect": {
+        "build": {
+          "builder": "@nrwl/node:build",
+          "options": {
+            "outputPath": "dist/apps/services/promotion",
+            "main": "apps/services/promotion/src/main.ts",
+            "tsConfig": "apps/services/promotion/tsconfig.app.json",
+            "assets": ["apps/services/promotion/src/assets"]
+          },
+          "configurations": {
+            "production": {
+              "optimization": true,
+              "extractLicenses": true,
+              "inspect": false,
+              "fileReplacements": [
+                {
+                  "replace": "apps/services/promotion/src/environments/environment.ts",
+                  "with": "apps/services/promotion/src/environments/environment.prod.ts"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@nrwl/node:execute",
+          "options": {
+            "buildTarget": "services-promotion:build"
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:lint",
+          "options": {
+            "linter": "eslint",
+            "tsConfig": [
+              "apps/services/promotion/tsconfig.app.json",
+              "apps/services/promotion/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!apps/services/promotion/**/*"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "apps/services/promotion/jest.config.js",
+            "tsConfig": "apps/services/promotion/tsconfig.spec.json",
+            "passWithNoTests": true
+          }
+        }
+      }
     }
   },
   "cli": {
