@@ -5,7 +5,7 @@ import { Cart } from './cart.entity';
 @EntityRepository(Cart)
 export class CartRepository extends Repository<Cart> {
 
-     async getCart(id: string){
-        return await this.findOneOrFail(id);
+     async getCartForUser(userId: string):Promise<Cart[]>{
+        return await this.find({where: [{userId : userId}]});
     }
 }

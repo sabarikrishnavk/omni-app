@@ -11,10 +11,8 @@ export class CartResolver {
   
 
   @Query(returns => CartResponse)
-  async getCartItems(@Args('userId') userId: string): Promise<CartResponse> {
-    
-      return await this.cartService.getCartItems(userId);
-    
+  async getCart(@Args('userId') userId: string): Promise<CartResponse> {
+      return await this.cartService.getCart(userId);
   }
 
   @Mutation(returns => CartResponse)
@@ -22,7 +20,6 @@ export class CartResolver {
     @Args('item') item: CartItemRequest,
   ):Promise<CartResponse>{ 
         return  await this.cartService.addItem(item);
-       
   }
 
   

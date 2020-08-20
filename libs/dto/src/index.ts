@@ -20,4 +20,4 @@ export { PromotionRuleConfig} from './lib/PromotionRuleConfig';
 export { EligiblePromotion} from './lib/EligiblePromotion';
 export { StoreAddress } from './lib/StoreAddress';
 
-// export { BaseEntity } from './db/base.entity';
+export { BaseEntity } from './db/base.entity';
