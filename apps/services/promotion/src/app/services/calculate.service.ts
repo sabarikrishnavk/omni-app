@@ -1,6 +1,6 @@
 import { Rools } from  'rools';
-import { PromotionResponse , EligiblePromotion } from '@omni-app/dto'; 
-import { PromotionService} from './client/promotion.service';
+import { CartPromotionResponse , EligiblePromotion } from '@omni-app/dto'; 
+import { PromotionService} from './promotion.service';
 
 import { Injectable } from '@nestjs/common';  
 @Injectable()
@@ -8,7 +8,7 @@ export class CalculateService {
 
     constructor(private readonly promotionService: PromotionService) {}
 
-    async calculatePromotion (cart:PromotionResponse , applicablePromos:EligiblePromotion) :Promise<PromotionResponse> {  
+    async calculatePromotion (cart:CartPromotionResponse , applicablePromos:EligiblePromotion) :Promise<CartPromotionResponse> {  
 
    
         if(applicablePromos.item){   

@@ -10,7 +10,7 @@ import { CartResponse } from './CartResponse';
 // import { ShipModeGroup } from './ShipModeGroup'; 
 
 @ObjectType()
-export class PromotionResponse extends CartResponse { 
+export class CartPromotionResponse extends CartResponse { 
  
     appliedPromotions?:Array<Promotion> = new Array<Promotion>(); 
     promotions?: Map<String,PromotionRuleConfig> =new Map<string,PromotionRuleConfig> ();;

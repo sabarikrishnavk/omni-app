@@ -6,10 +6,10 @@
 import { Logger } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
 
-import { AppModule } from './app/app.module';
+import { PromotionModule } from './app/promotion.module';
 
 async function bootstrap() {
-  const app = await NestFactory.create(AppModule);
+  const app = await NestFactory.create(PromotionModule);
   const globalPrefix = 'api/v1/promotion';
   app.setGlobalPrefix(globalPrefix);
   const port = process.env.PORT || 3333;

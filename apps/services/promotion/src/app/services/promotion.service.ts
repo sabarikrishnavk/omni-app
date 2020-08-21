@@ -1,5 +1,5 @@
 
-import { PromotionRule, EligiblePromotion ,PromotionResponse } from '@omni-app/dto'; 
+import { PromotionRule, EligiblePromotion ,CartPromotionResponse } from '@omni-app/dto'; 
 import { ORD_PERCENTAGE_OFF ,ORD_DOLLAR_OFF } from '../rules/order';
 import { ITEM_PERCENTAGE_OFF } from '../rules/order-item'; 
 
@@ -13,7 +13,7 @@ export class PromotionService {
     //Query eligible promotions from promotion elastic service
     //Filter from order/shipping level promotions which are eligible for this cart
 
-    async getEligiblePromotions(cart: PromotionResponse ): Promise<EligiblePromotion>{  
+    async getEligiblePromotions(cart: CartPromotionResponse ): Promise<EligiblePromotion>{  
         let applicablePromos    = new EligiblePromotion();
         applicablePromos.order  = new Array<PromotionRule>();
         applicablePromos.item   = new Array<PromotionRule>(); 

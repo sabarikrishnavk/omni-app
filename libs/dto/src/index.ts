@@ -2,7 +2,7 @@
 export { AddressResponse  } from './response/AddressResponse'; 
 export { SkuPrice } from './lib/SkuPrice';
 export { ShipModeGroupResponse } from './response/ShipModeGroupResponse';
-export { PromotionResponse } from './response/PromotionResponse';
+export { CartPromotionResponse } from './response/CartPromotionResponse';
 
 export { CartItemRequest } from './request/CartItemRequest';
 
