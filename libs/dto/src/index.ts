@@ -1,9 +1,12 @@
 
-export { Address } from './lib/Address'; 
+export { AddressResponse  } from './response/AddressResponse'; 
 export { SkuPrice } from './lib/SkuPrice';
-export { ShipModeGroup} from './lib/ShipModeGroup';
+export { ShipModeGroupResponse } from './response/ShipModeGroupResponse';
+export { PromotionResponse } from './response/PromotionResponse';
 
 export { CartItemRequest } from './request/CartItemRequest';
+
+
 export { CartItemResponse } from './response/CartItemResponse';
 export { CartResponse } from './response/CartResponse';
 

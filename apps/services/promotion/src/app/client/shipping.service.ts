@@ -1,5 +1,5 @@
 
-import {CartResponse , ShipModeGroup} from '@omni-app/dto';  
+import {CartResponse , ShipModeGroupResponse} from '@omni-app/dto';  
 
 import { Injectable } from '@nestjs/common'; 
 
@@ -11,7 +11,7 @@ export class ShippingService {
     async getShippingCharge(cart: CartResponse): Promise<CartResponse> {
 
         //Pass the skus, quantity and store and the address to an API which would return the following details.
-        let skuShipCharges = new Array<ShipModeGroup>(); 
+        let skuShipCharges = new Array<ShipModeGroupResponse>(); 
         skuShipCharges = [
             { 
                 skus: ["SKU1","SKU2" ] , 

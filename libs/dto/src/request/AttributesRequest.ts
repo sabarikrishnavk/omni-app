@@ -1,7 +1,7 @@
 import { InputType, Field } from "@nestjs/graphql"; 
 
 @InputType() 
-export class Attributes {
+export class AttributesRequest {
     @Field()
     key?: string;
     @Field()

@@ -29,9 +29,4 @@ export class CartResponse {
 
     // @Field(type => [ShipModeGroup])
     // shipModes: Array<ShipModeGroup>     = new Array<ShipModeGroup>();
-
-    // @Field(type => [Promotion])
-    appliedPromotions?:Array<Promotion> = new Array<Promotion>(); 
-    promotions?: Map<String,PromotionRuleConfig> =new Map<string,PromotionRuleConfig> ();;
- 
 }

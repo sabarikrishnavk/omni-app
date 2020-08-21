@@ -1,6 +1,7 @@
 import { InputType,ObjectType, Field } from "@nestjs/graphql";
-import {ChargeResponse} from './ChargeResponse';
-import { ShipMode } from '../lib/ShipMode';
+import { ChargeResponse } from './ChargeResponse';
+import { ShipModeResponse } from './ShipModeResponse';
+import { AttributesResponse } from './AttributesResponse';
 
  
 @ObjectType()
@@ -15,16 +16,13 @@ export class CartItemResponse {
     quantity?: number;
 
     @Field()
-    unitprice?: number;
-    
-    // @Field(type => Map) 
-    attributes?: Map<string,string>; //cart item attributes 
+    unitprice?: number; 
 
-    // @Field(type => Map) 
-    skuattributes? :Map<string,string>; //cart item attributes 
+    @Field(type => [AttributesResponse])
+    attributes : AttributesResponse[];
 
-    @Field(type => ShipMode)
-    shipMode: ShipMode;
+    @Field(type => ShipModeResponse)
+    shipMode: ShipModeResponse;
     
     @Field(type => ChargeResponse)
     charge?: ChargeResponse = new ChargeResponse();

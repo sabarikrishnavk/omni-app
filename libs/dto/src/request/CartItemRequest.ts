@@ -1,21 +1,20 @@
 
 import { InputType,ObjectType, Field } from "@nestjs/graphql";
-import { Attributes } from '../lib/Attributes';
+import { AttributesRequest } from '../request/AttributesRequest';
  
 @InputType() 
 export class CartItemRequest {  
  
     @Field()
     userId?: string;
-
-
+    
     @Field()
     sku?: string;
     
     @Field()
     quantity?: number;
 
-    @Field(type => [Attributes])
-    attributes : Attributes[];
+    @Field(type => [AttributesRequest])
+    attributes : AttributesRequest[];
  
 }

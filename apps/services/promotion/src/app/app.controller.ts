@@ -5,7 +5,7 @@ import { CalculateService} from './calculate.service';
 import { PromotionService} from './client/promotion.service'; 
 import { ShippingService} from './client/shipping.service'; 
 import { SkuService} from './client/sku.service'; 
-import { CartResponse,Promotion,  PromotionRuleConfig ,ChargeResponse } from '@omni-app/dto'; 
+import { PromotionResponse,Promotion,  PromotionRuleConfig ,ChargeResponse } from '@omni-app/dto'; 
 
 @Controller()
 export class AppController {
@@ -16,13 +16,9 @@ export class AppController {
     , private readonly promotionService: PromotionService) {}
 
 
-  // @Get()
-  // getData() {
-  //   return this.appService.getData();
-  // }
 
   @Post()
-  async calculatePromotion(@Body() cart:CartResponse){
+  async calculatePromotion(@Body() cart:PromotionResponse){
     console.log('Cart : '+ cart);
 
 
