@@ -4,10 +4,12 @@ export { SkuPrice } from './lib/SkuPrice';
 export { ShipModeGroupResponse } from './response/ShipModeGroupResponse';
 export { CartPromotionResponse } from './response/CartPromotionResponse';
 
-export { CartItemRequest } from './request/CartItemRequest';
-
-
+export { CartItemRequest } from './request/CartItemRequest';  
 export { CartItemResponse } from './response/CartItemResponse';
+
+export { ProductRequest} from './request/ProductRequest';
+export { ProductResponse } from './response/ProductResponse';
+
 export { CartResponse } from './response/CartResponse';
 
 export { ChargeResponse } from './response/ChargeResponse';

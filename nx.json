@@ -36,6 +36,9 @@
     },
     "services-promotion": {
       "tags": []
+    },
+    "services-inventory": {
+      "tags": []
     }
   }
 }

@@ -251,6 +251,62 @@
           }
         }
       }
+    },
+    "services-inventory": {
+      "root": "apps/services/inventory",
+      "sourceRoot": "apps/services/inventory/src",
+      "projectType": "application",
+      "prefix": "services-inventory",
+      "schematics": {},
+      "architect": {
+        "build": {
+          "builder": "@nrwl/node:build",
+          "options": {
+            "outputPath": "dist/apps/services/inventory",
+            "main": "apps/services/inventory/src/main.ts",
+            "tsConfig": "apps/services/inventory/tsconfig.app.json",
+            "assets": ["apps/services/inventory/src/assets"]
+          },
+          "configurations": {
+            "production": {
+              "optimization": true,
+              "extractLicenses": true,
+              "inspect": false,
+              "fileReplacements": [
+                {
+                  "replace": "apps/services/inventory/src/environments/environment.ts",
+                  "with": "apps/services/inventory/src/environments/environment.prod.ts"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@nrwl/node:execute",
+          "options": {
+            "buildTarget": "services-inventory:build"
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:lint",
+          "options": {
+            "linter": "eslint",
+            "tsConfig": [
+              "apps/services/inventory/tsconfig.app.json",
+              "apps/services/inventory/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!apps/services/inventory/**/*"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "apps/services/inventory/jest.config.js",
+            "tsConfig": "apps/services/inventory/tsconfig.spec.json",
+            "passWithNoTests": true
+          }
+        }
+      }
     }
   },
   "cli": {
