@@ -11,6 +11,9 @@ export class ShipModeGroupResponse {
     @Field(type =>[String])
     skus?: Array<string>; 
 
+    @Field(type => AddressResponse)
+    address?: AddressResponse;
+
     @Field(type => [ShipModeResponse])
     modes?: Array<ShipModeResponse>; 
     

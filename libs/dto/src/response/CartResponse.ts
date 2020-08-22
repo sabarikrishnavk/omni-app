@@ -21,12 +21,5 @@ export class CartResponse {
     items?: Array<CartItemResponse> = [];
 
     @Field(type => ChargeResponse)
-    charge?: ChargeResponse = new ChargeResponse();
-
-    // @Field(type => Payments )
-    // payments?: Payments;
- 
-
-    // @Field(type => [ShipModeGroup])
-    // shipModes: Array<ShipModeGroup>     = new Array<ShipModeGroup>();
+    charge?: ChargeResponse = new ChargeResponse(); 
 }

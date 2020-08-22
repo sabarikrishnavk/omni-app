@@ -1,7 +1,7 @@
-import { ObjectType, Field } from "@nestjs/graphql"; 
+import {  Field, InputType } from "@nestjs/graphql"; 
 
-@ObjectType()
-export class AddressResponse {
+@InputType()
+export class AddressRequest {
     @Field()
     id?: number;
     @Field()
