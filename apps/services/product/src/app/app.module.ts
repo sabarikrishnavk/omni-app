@@ -1,5 +1,4 @@
-import { Module } from '@nestjs/common';
-import { TypeOrmModule } from '@nestjs/typeorm';
+import { Module } from '@nestjs/common'; 
 import { GraphQLFederationModule } from '@nestjs/graphql';
 import { ProductResolver } from './product.resolver';
 import { ProductService } from './product.service';

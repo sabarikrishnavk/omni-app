@@ -10,6 +10,9 @@ export { CartItemResponse } from './response/CartItemResponse';
 export { ProductRequest} from './request/ProductRequest';
 export { ProductResponse } from './response/ProductResponse';
 
+export { InventoryRequest} from './request/InventoryRequest';
+export { InventoryResponse }from './response/InventoryResponse';
+
 export { CartResponse } from './response/CartResponse';
 
 export { ChargeResponse } from './response/ChargeResponse';
