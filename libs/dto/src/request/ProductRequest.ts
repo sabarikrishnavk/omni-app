@@ -1,26 +1,26 @@
-import { InputType,ObjectType, Field } from "@nestjs/graphql";
+// import { InputType,ObjectType, Field } from "@nestjs/graphql";
 
-@InputType()
-export class ProductRequest{
-    @Field()
-    id?: string;
+// @InputType()
+// export class ProductRequest{
+//     @Field()
+//     id?: string;
 
-    @Field()
-    sku?: string;
+//     @Field()
+//     sku?: string;
 
-    @Field()
-    name?: string;
+//     @Field()
+//     name?: string;
 
-    @Field()
-    description?: string;
+//     @Field()
+//     description?: string;
 
-    @Field()
-    image : string;
+//     @Field()
+//     image : string;
 
-    @Field()
-    brand : string;
+//     @Field()
+//     brand : string;
 
-    @Field()
-    manufacturer : string;
+//     @Field()
+//     manufacturer : string;
  
-}
+// }

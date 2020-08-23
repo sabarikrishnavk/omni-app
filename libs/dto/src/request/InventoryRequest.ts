@@ -1,14 +1,14 @@
-import { InputType,ObjectType, Field } from "@nestjs/graphql";
+// import { InputType,ObjectType, Field } from "@nestjs/graphql";
 
-@InputType()
-export class InventoryRequest{
-    @Field()
-    id?: string;
+// @InputType()
+// export class InventoryRequest{
+//     @Field()
+//     id?: string;
 
-    @Field()
-    sku?: string;
+//     @Field()
+//     sku?: string;
 
-    @Field()
-    location?: string; 
+//     @Field()
+//     location?: string; 
  
-}
+// }

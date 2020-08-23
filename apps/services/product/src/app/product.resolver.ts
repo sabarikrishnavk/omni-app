@@ -1,9 +1,9 @@
 import { Args, Mutation, Query, Resolver , } from '@nestjs/graphql';
 import { Inject } from '@nestjs/common';  
-import { ProductResponse, ProductRequest } from '@omni-app/dto';
+import { ProductResponse } from '@omni-app/dto';
 import { ProductService } from './product.service';
 
-@Resolver(of => ProductRequest)
+@Resolver(of => ProductResponse)
 export class ProductResolver {
   constructor( @Inject(ProductService)  private productService: ProductService  ) {
     

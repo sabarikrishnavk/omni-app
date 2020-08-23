@@ -1,9 +1,9 @@
-import { Args, Mutation, Query, Resolver , } from '@nestjs/graphql';
+import { Args, Mutation, Query, Resolver, ResolveProperty, Parent , } from '@nestjs/graphql';
 import { Inject } from '@nestjs/common';  
-import { InventoryResponse, InventoryRequest } from '@omni-app/dto';
+import { InventoryResponse,  ProductResponse } from '@omni-app/dto';
 import { InventoryService } from './inventory.service';
 
-@Resolver(of => InventoryRequest)
+@Resolver(InventoryResponse)
 export class InventoryResolver {
   constructor( @Inject(InventoryService)  private inventoryService: InventoryService  ) {
     
@@ -15,6 +15,11 @@ export class InventoryResolver {
       return await this.inventoryService.getInventory(sku,location);
   }
 
+  //https://docs.nestjs.com/graphql/federation
+  // @ResolveProperty('product')
+  // async getProduct(@Parent() inventory: InventoryResponse) {
+  //   return { __typename: ProductResponse, id: inventory.id };ß
+  // }
   // @Mutation(returns => CartResponse)
   // async addItem(
   //   @Args('item') item: InventoryRequest,

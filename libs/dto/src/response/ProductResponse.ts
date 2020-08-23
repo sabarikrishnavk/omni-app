@@ -1,6 +1,7 @@
 import { InputType,ObjectType, Field } from "@nestjs/graphql";
 
 @ObjectType()
+@InputType("ProductInput")
 export class ProductResponse{
     @Field()
     id : string;

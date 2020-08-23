@@ -1,6 +1,8 @@
-import { InputType,ObjectType, Field } from "@nestjs/graphql";
+import { InputType,ObjectType, Field } from "@nestjs/graphql"; 
+import { ProductResponse } from './ProductResponse'; 
 
 @ObjectType()
+@InputType(  "InventoryInput")
 export class InventoryResponse{
     @Field()
     id : string;
@@ -13,6 +15,9 @@ export class InventoryResponse{
 
     @Field({nullable: true})
     stock: number;
+
+    @Field(type => ProductResponse, {nullable: true})
+    product : ProductResponse;
  
  
 }
