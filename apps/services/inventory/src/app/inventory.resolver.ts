@@ -16,10 +16,10 @@ export class InventoryResolver {
   }
 
   //https://docs.nestjs.com/graphql/federation
-  // @ResolveProperty('product')
-  // async getProduct(@Parent() inventory: InventoryResponse) {
-  //   return { __typename: ProductResponse, id: inventory.id };ß
-  // }
+  @ResolveProperty('product',  type => ProductResponse)
+  async getProduct(@Parent() inventory: InventoryResponse) {
+    return { __typename: ProductResponse, id: inventory.id };
+  }
   // @Mutation(returns => CartResponse)
   // async addItem(
   //   @Args('item') item: InventoryRequest,
