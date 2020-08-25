@@ -1,7 +1,8 @@
-import { ObjectType, Field } from "@nestjs/graphql";
+import { ObjectType, Field, InputType } from "@nestjs/graphql";
  
 @ObjectType()
-export class ChargeResponse {
+@InputType('ChargeInput')
+export class CartCharges {
     @Field()
     skucharge: number  = 0;
     @Field()

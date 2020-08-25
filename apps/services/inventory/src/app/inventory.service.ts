@@ -1,5 +1,5 @@
 import { Injectable ,HttpException } from '@nestjs/common';
-import { InventoryResponse } from '@omni-app/dto';
+import { Inventory } from '@omni-app/dto';
  
 import { Client, ApiResponse, RequestParams } from '@elastic/elasticsearch'
 
@@ -15,7 +15,7 @@ export class InventoryService {
     }
 
 
-  async getInventory(sku: string, location:string): Promise<InventoryResponse> { 
+  async getInventory(sku: string, location:string): Promise<Inventory> { 
  
     const body = {
         size: 200,
@@ -26,19 +26,25 @@ export class InventoryService {
             },
         },
     };
-    let response = new  Array<InventoryResponse>();
+    let response = new  Array<Inventory>();
     return  this.esclient.search({index: 'inventory', body: body})
         .then((results:ApiResponse) => {
             console.log('getInventory:  '+ sku + ' :response :'+ JSON.stringify(results.body.hits.hits));
 
             results.body.hits.hits.forEach(
                 (hit, index) => { 
-                    let inventory = new InventoryResponse();
+                    let inventory = new Inventory();
                     inventory={...hit._source};
                     response.push(inventory);
                 }
               );
-            return response[0];
+              if(response.length >0 ){
+                return response[0]; 
+              }else{
+                  let resp=  new Inventory();
+                  resp.id = sku;
+                  return resp;
+              }
         })
         .catch(err => { throw new HttpException(err, 500); });
  

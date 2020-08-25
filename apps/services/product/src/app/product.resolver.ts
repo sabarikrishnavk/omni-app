@@ -1,17 +1,17 @@
 import { Args, Mutation, Query, Resolver , } from '@nestjs/graphql';
 import { Inject } from '@nestjs/common';  
-import { ProductResponse } from '@omni-app/dto';
+import { Product } from '@omni-app/dto';
 import { ProductService } from './product.service';
 
-@Resolver(of => ProductResponse)
+@Resolver(of => Product)
 export class ProductResolver {
   constructor( @Inject(ProductService)  private productService: ProductService  ) {
     
    }
   
 
-  @Query(returns => ProductResponse)
-  async getProduct(@Args('sku') sku: string): Promise<ProductResponse> {
+  @Query(returns => Product)
+  async getProduct(@Args('sku') sku: string): Promise<Product> {
       return await this.productService.getProduct(sku);
   }
 

@@ -1,1 +1,1 @@
-export { Cart} from './entity/cart';
+export { CartDB } from './entity/cart-db';

@@ -1,9 +1,9 @@
 
 import { Entity, Column } from 'typeorm'; 
-import { CartItemRequest ,BaseEntity } from '@omni-app/dto';
+import { CartItem ,BaseEntity } from '@omni-app/dto';
 
 @Entity({ name: 'cart' })
-export class Cart extends BaseEntity{ 
+export class CartDB extends BaseEntity{ 
 
   @Column({ type: 'varchar', length: 300 })
   store: string;
@@ -13,7 +13,7 @@ export class Cart extends BaseEntity{
   userId: string;
 
   @Column({ type: 'jsonb'})
-  items: CartItemRequest[];
+  items: CartItem[];
 
   
 } 

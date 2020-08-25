@@ -1,11 +1,11 @@
 
 import { EntityRepository, Repository } from 'typeorm';
-import { Cart } from './cart.entity';
+import { CartDB } from './cart.entity';
 
-@EntityRepository(Cart)
-export class CartRepository extends Repository<Cart> {
+@EntityRepository(CartDB)
+export class CartRepository extends Repository<CartDB> {
 
-     async getCartForUser(userId: string):Promise<Cart[]>{
+     async getCartForUser(userId: string):Promise<CartDB[]>{
         return await this.find({where: [{userId : userId}]});
     }
 }

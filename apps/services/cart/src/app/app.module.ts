@@ -3,7 +3,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { GraphQLFederationModule } from '@nestjs/graphql';
 
 import { CartModule} from './cart.module';
-import { Cart } from './cart.entity';
+import { CartDB } from './cart.entity';
 
 @Module({ 
   imports: [
@@ -17,7 +17,7 @@ import { Cart } from './cart.entity';
       username: 'testuser',
       password: 'password',
       database: 'testdb',
-      entities: [Cart],
+      entities: [CartDB],
       synchronize: true,
     }) ,
     CartModule

@@ -4,7 +4,7 @@ import { CalculateService} from './services/calculate.service';
 import { PromotionService} from './services/promotion.service'; 
 import { ShippingService} from './client/shipping.service'; 
 import { SkuService} from './client/sku.service'; 
-import { CartPromotionResponse,Promotion,  PromotionRuleConfig ,ChargeResponse } from '@omni-app/dto'; 
+import { CartPromotion, Promotion,  PromotionRuleConfig ,CartCharges } from '@omni-app/dto'; 
 
 @Controller()
 export class PromotionController {
@@ -17,13 +17,13 @@ export class PromotionController {
 
 
   @Post()
-  async calculatePromotion(@Body() cart:CartPromotionResponse){
+  async calculatePromotion(@Body() cart:CartPromotion){
     console.log('Cart : '+ cart);
 
 
     cart.appliedPromotions= new Array<Promotion>();
     cart.promotions       = new Map<string,PromotionRuleConfig> ();
-    cart.charge           = new ChargeResponse();
+    cart.charge           = new CartCharges();
     cart.charge.total     = 0;
     cart.charge.shipping  = 0;
     cart.charge.skucharge = 0;
@@ -32,7 +32,7 @@ export class PromotionController {
 
 
     cart.items.filter(function(item) {
-      item.charge             = new ChargeResponse(); 
+      item.charge             = new CartCharges(); 
       item.charge.discount    = 0;
       item.charge.shipping    = 0;
       item.charge.skucharge   = 0; 

@@ -1,24 +1,24 @@
 import { Args, Mutation, Query, Resolver , } from '@nestjs/graphql';
 import { Inject } from '@nestjs/common'; 
-import { CartResponse,CartItemRequest } from '@omni-app/dto';
+import { Cart ,CartItem } from '@omni-app/dto';
 import { CartService } from './cart.service';
 
-@Resolver(of => CartItemRequest)
+@Resolver(of => CartItem)
 export class CartResolver {
   constructor( @Inject(CartService)  private cartService: CartService  ) {
     
    }
   
 
-  @Query(returns => CartResponse)
-  async getCart(@Args('userId') userId: string): Promise<CartResponse> {
+  @Query(returns => Cart)
+  async getCart(@Args('userId') userId: string): Promise<Cart> {
       return await this.cartService.getCart(userId);
   }
 
-  @Mutation(returns => CartResponse)
+  @Mutation(returns => Cart)
   async addItem(
-    @Args('item') item: CartItemRequest,
-  ):Promise<CartResponse>{ 
+    @Args('item') item: CartItem,
+  ):Promise<Cart>{ 
         return  await this.cartService.addItem(item);
   }
 

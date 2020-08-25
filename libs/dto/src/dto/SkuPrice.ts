@@ -1,6 +1,6 @@
 import { InputType, ObjectType,Field } from "@nestjs/graphql";
 
-@InputType()
+@InputType('SkuPriceInput')
 @ObjectType()
 export class SkuPrice {
     @Field()

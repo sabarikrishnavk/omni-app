@@ -1,8 +1,8 @@
 import { InputType, ObjectType,Field } from "@nestjs/graphql";
 
-// @InputType()
+@InputType('ShipModeInput')
 @ObjectType()
-export class ShipModeResponse{
+export class ShipMode{
 
     @Field()
     code?: string; 

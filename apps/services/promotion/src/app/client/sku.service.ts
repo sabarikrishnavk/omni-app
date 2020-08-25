@@ -1,14 +1,13 @@
-import {CartResponse, SkuPrice } from '@omni-app/dto';  
+import {CartPromotion, SkuPrice } from '@omni-app/dto';  
 
 import { Injectable } from '@nestjs/common'; 
-
 
 @Injectable()
 export class SkuService {
  
 
     //Find the SKU prices from product elastic index.
-    async getSKUPrice(cart: CartResponse ): Promise<CartResponse>{
+    async getSKUPrice(cart: CartPromotion ): Promise<CartPromotion>{
         let skus = cart.items.map(item => item.sku);
         //find Price by skus and cart.store
         let skuPrices  = new Array<SkuPrice>();

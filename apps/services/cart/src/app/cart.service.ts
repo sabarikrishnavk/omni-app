@@ -1,8 +1,8 @@
 import { Injectable } from '@nestjs/common'; 
 import { InjectRepository } from '@nestjs/typeorm'; 
-import { CartResponse , CartItemRequest, CartItemResponse} from '@omni-app/dto'; 
+import { Cart , CartItem } from '@omni-app/dto'; 
 import { CartRepository } from './cart.repo';
-import { Cart } from './cart.entity';
+import { CartDB } from './cart.entity';
 
 @Injectable()
 export class CartService {
@@ -12,23 +12,29 @@ export class CartService {
   ) {} 
 
 
-  private sets: CartResponse[] =[] ;
+  private sets: Cart[] =[] ;
 
-  async getCart(userId: string): Promise<CartResponse> {
+  async getCart(userId: string): Promise<Cart> {
 
-    let cart = new CartResponse();
+    let cart = new Cart();
     console.log('find -- ')
-    let cartDb = await this.cartRepository.getCartForUser(userId);
-    cart.cartid = cartDb[0].id; 
-    console.log('cart -- '+ cartDb[0]) 
+    let cartDBUser = await this.cartRepository.getCartForUser(userId);
+
+    let cartDB = cartDBUser[0];
+    cart.cartid = cartDB.id; 
+    console.log('cart -- '+ cartDB);
+
+    cart.cartid = cartDB.id;
+    cart.userId = cartDB.userId
+    cart.items = cartDB.items;
 
     return cart;
   }
-  async addItem(item: CartItemRequest): Promise<CartResponse> {
+  async addItem(item: CartItem): Promise<Cart> {
 
-    let cart = new CartResponse();
+    let cart = new Cart();
 
-    let cartDB =  new Cart();
+    let cartDB =  new CartDB();
     cartDB.store = 'store1';
     cartDB.lastChangedBy = 'sabari';
     cartDB.createdBy = 'sabari'; 
@@ -42,16 +48,10 @@ export class CartService {
 
 
     cartDB = await this.cartRepository.save(cartDB);
-     
-    console.log('Saved cartDB : ' + cartDB.id);
+      
     cart.cartid = cartDB.id;
-    let itemResponse = new CartItemResponse();
-    itemResponse.sku = item.sku;
-    itemResponse.quantity = item.quantity; 
-
-    cart.items.push(itemResponse);
-
-    this.sets.push(cart);
+    cart.userId = cartDB.userId
+    cart.items = cartDB.items;
     return cart;
   }
 }
