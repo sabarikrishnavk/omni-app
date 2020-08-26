@@ -10,8 +10,8 @@ import { GraphQLGatewayModule } from '@nestjs/graphql';
       },
       gateway: {
         serviceList: [
-          { name: 'product', url: 'http://localhost:4001/graphql' },
-          { name: 'inventory', url: 'http://localhost:4002/graphql' },
+          { name: 'Product', url: 'http://localhost:4001/graphql' },
+          { name: 'Inventory', url: 'http://localhost:4002/graphql' },
         ],
       },
     }),

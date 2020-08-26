@@ -3,6 +3,7 @@ import { Address } from './Address';
 import { ShipMode} from './ShipMode';
  
 @ObjectType()
+@InputType('ShipModeGroupInput')
 export class ShipModeGroup {
 
     @Field()

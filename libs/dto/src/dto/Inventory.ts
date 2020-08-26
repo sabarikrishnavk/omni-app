@@ -17,7 +17,7 @@ export class Inventory{
     stock: number;
 
     @Field(type => Product, {nullable: true})
-    product : Product;
+    productDetail : Product;
  
  
 }

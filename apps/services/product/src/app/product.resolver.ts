@@ -1,9 +1,9 @@
-import { Args, Mutation, Query, Resolver , } from '@nestjs/graphql';
+import { Args, Mutation, Query, Resolver, ResolveReference , } from '@nestjs/graphql';
 import { Inject } from '@nestjs/common';  
 import { Product } from '@omni-app/dto';
 import { ProductService } from './product.service';
 
-@Resolver(of => Product)
+@Resolver(Product)
 export class ProductResolver {
   constructor( @Inject(ProductService)  private productService: ProductService  ) {
     
@@ -13,6 +13,12 @@ export class ProductResolver {
   @Query(returns => Product)
   async getProduct(@Args('sku') sku: string): Promise<Product> {
       return await this.productService.getProduct(sku);
+  }
+
+  @ResolveReference()
+  resolveReference(reference: { __typename: string; id: string }) {
+    console.log('reference in product api :' + reference.id);
+    return this.productService.getProduct(reference.id);
   }
 
   // @Mutation(returns => CartResponse)

@@ -1,4 +1,5 @@
 import { InputType,ObjectType, Field } from "@nestjs/graphql";
+import { Inventory } from './Inventory';
 
 @ObjectType()
 @InputType("ProductInput")
@@ -22,6 +23,6 @@ export class Product{
     brand : string;
 
     @Field({nullable: true})
-    manufacturer : string;
+    manufacturer : string; 
  
 }
