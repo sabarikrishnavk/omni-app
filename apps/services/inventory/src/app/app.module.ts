@@ -7,7 +7,8 @@ import { InventoryService } from './inventory.service';
 @Module({ 
   imports: [
     GraphQLFederationModule.forRoot({
-      autoSchemaFile: true 
+      autoSchemaFile: true ,
+      
     }),
     
   ], 

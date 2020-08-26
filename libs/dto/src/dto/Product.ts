@@ -1,10 +1,11 @@
-import { InputType,ObjectType, Field } from "@nestjs/graphql";
-import { Inventory } from './Inventory';
+import { InputType,ObjectType, Field, Directive, ID } from "@nestjs/graphql";
 
 @ObjectType()
 @InputType("ProductInput")
-export class Product{
-    @Field()
+@Directive('@key(fields: "id")')
+export class Product{ 
+
+    @Field(() => ID)
     id : string;
 
     @Field({nullable: true})

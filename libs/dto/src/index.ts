@@ -14,8 +14,7 @@ export { Cart  } from './dto/Cart';
 export { ShipMode  } from './dto/ShipMode'; 
 export { ShipModeRequest } from './dto/ShipModeRequest';
 export { ShipModeGroup } from './dto/ShipModeGroup';
-
-export { Inventory  } from './dto/Inventory'; 
+ 
 
 export { Product  } from './dto/Product'; 
 export { SkuPrice } from './dto/SkuPrice';

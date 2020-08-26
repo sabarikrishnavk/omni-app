@@ -16,7 +16,7 @@ export class ProductResolver {
   }
 
   @ResolveReference()
-  resolveReference(reference: { __typename: string; id: string }) {
+  resolveReference(reference: { __typename: string ; id: string }): Promise<Product>  {
     console.log('reference in product api :' + reference.id);
     return this.productService.getProduct(reference.id);
   }

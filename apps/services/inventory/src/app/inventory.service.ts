@@ -1,5 +1,5 @@
 import { Injectable ,HttpException } from '@nestjs/common';
-import { Inventory } from '@omni-app/dto';
+import { Inventory } from './dto/Inventory';
  
 import { Client, ApiResponse, RequestParams } from '@elastic/elasticsearch'
 

@@ -1,9 +1,12 @@
 import { Args, Mutation, Query, Resolver, ResolveProperty, Parent, ResolveField,  } from '@nestjs/graphql';
 import { Inject } from '@nestjs/common';  
-import { Inventory,  Product } from '@omni-app/dto';
+import {  Product } from '@omni-app/dto';
 import { InventoryService } from './inventory.service'; 
+import { defaultFieldResolver } from 'graphql';
+import { Inventory } from './dto/Inventory';
+import { InventoryProduct } from './dto/InventoryProduct';
 
-@Resolver(Inventory)
+@Resolver(()=>Inventory)
 export class InventoryResolver {
   constructor( @Inject(InventoryService)  private inventoryService: InventoryService  ) {
     
@@ -16,10 +19,11 @@ export class InventoryResolver {
   }
 
   //https://docs.nestjs.com/graphql/federation
-  @ResolveField('productDetail',  type => Product,{})
-  getProduct(@Parent() inventory: Inventory) {
+  //https://doug-martin.github.io/nestjs-query/docs/graphql/federation/
+  @ResolveField('productDetail', ()=> InventoryProduct) 
+  productDetail(@Parent() inventory: Inventory) {
     console.log('reference in inventory api :' + inventory.id);
-    return { __typename: 'Product', id: inventory.id };
+    return { __typename: 'Product' , id: inventory.id };
   }
   // @Mutation(returns => CartResponse)
   // async addItem(
