@@ -1,3 +1,91 @@
+Prerequisite
+
+Elastic instance:
+----
+
+docker-compose -f docker-product-es.yml up
+
+create index based on es-mapping and load  data into index
+----
+
+cd setup
+<br>
+npm run setup:product
+<br>
+npm run setup:inventory
+<br>
+http://localhost:9200/product/_search 
+<br>
+http://localhost:9200/inventory/_search
+
+Start API
+—-
+nx serve services-product
+nx serve services-inventory
+nx serve gateway-eco
+
+# OmniApps
+
+npx create-nx-workspace@latest omni-apps
+
+
+Select >> empty option >> nx
+
+npm install --save-dev @nrwl/nest @nrwl/react @nrwl/workspace @nestjs/common typescript openapi-typescript-codegen 
+
+
+## install graphql
+   
+npm install @nestjs/graphql apollo-server apollo-server-express graphql-tools graphql apollo-boost @apollo/react-hooks graphql @apollo/federation @apollo/gateway
+
+
+## graphql postgresql elastic search
+
+npm install --save @nestjs/typeorm typeorm pg elasticsearch
+
+## Rools engine
+
+npm install rools
+
+## Library for common dto
+
+
+nx g @nrwl/nest:library dto
+
+## Services for API/DB /Elastic interfaces
+
+nx g @nrwl/nest:application product --directory=services
+4001
+nx g @nrwl/nest:application inventory --directory=services 
+4002
+
+nx g @nrwl/nest:application cart --directory=services 
+5001
+
+nx g @nrwl/nest:application promotion --directory=services
+5002
+
+nx g @nrwl/nest:application user --directory=services 
+
+
+## Gateway apps
+Ecommerce APIs
+---
+nx generate @nrwl/nest:application ecom --directory=gateway  
+9001
+
+Customer experience Manager (legacy cms)
+---
+nx generate @nrwl/nest:application cxm --directory=gateway
+
+
+## Middleware apps (Events sourcing and CQRS layer)
+nx generate @nrwl/nest:application cart --directory=middleware  
+
+## UI/UX Widgets for front end applications 
+nx g @nrwl/react:library product --directory=widgets
+nx g @nrwl/react:library cart --directory=widgets
+
 # OmniApp
 
 This project was generated using [Nx](https://nx.dev).

@@ -1,9 +1,8 @@
 import { Test, TestingModule } from '@nestjs/testing'; 
 import { INestApplication, ValidationPipe } from '@nestjs/common';
-import { AppModule} from './app.module';
-import * as request  from 'supertest';
-import { GraphQLModule } from '@nestjs/graphql';
-import { Inventory } from './dto/Inventory';
+import { AppModule} from '../../src/app/app.module';
+import * as request  from 'supertest'; 
+import { Inventory } from '../../src/app/dto/Inventory';
 
 describe('Inventory service -e2e Testing',()=>{
 
@@ -16,17 +15,7 @@ describe('Inventory service -e2e Testing',()=>{
         ],
       }).compile();
 
-      app = moduleRef.createNestApplication();
-      // app.useGlobalPipes(
-      //   new ValidationPipe({
-      //     transform: true,
-      //     whitelist: true,
-      //     forbidNonWhitelisted: true,
-      //     skipMissingProperties: false,
-      //     forbidUnknownValues: true,
-      //   }),
-      // );
-
+      app = moduleRef.createNestApplication();  
       await app.init(); 
   });
   afterAll(async () => {
