@@ -20,9 +20,13 @@ http://localhost:9200/inventory/_search
 
 Start API
 —-
+<br>
 nx serve services-product
+<br>
 nx serve services-inventory
-nx serve gateway-eco
+<br>
+nx serve gateway-ecom
+<br>
 
 # OmniApps
 

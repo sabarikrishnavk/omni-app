@@ -24,6 +24,9 @@ export class InventoryService {
             match: {
                 id: sku,
             },
+            match: {
+                location: location,
+            }
         },
     };
     let response = new  Array<Inventory>();
