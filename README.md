@@ -28,6 +28,13 @@ nx serve services-inventory
 nx serve gateway-ecom
 <br>
 
+
+docker image build -t omni-app/services-product -f docker/services-product.Dockerfile .
+
+docker run services-product -p 8080:4001 -d omni-app/services-product
+
+
+
 # OmniApps
 
 npx create-nx-workspace@latest omni-apps
