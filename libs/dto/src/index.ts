@@ -1,4 +1,7 @@
 
+export {Login} from './dto/Login';
+export {Users} from './dto/Users';
+
 export { Address  } from './dto/Address'; 
 export { Attributes  } from './dto/Attributes'; 
 
@@ -9,7 +12,6 @@ export { CartItem  } from './dto/CartItem';
 export { CartPromotion } from './dto/CartPromotion';
 
 export { Cart  } from './dto/Cart'; 
-
 
 export { ShipMode  } from './dto/ShipMode'; 
 export { ShipModeRequest } from './dto/ShipModeRequest';

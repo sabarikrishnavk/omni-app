@@ -78,6 +78,8 @@ nx g @nrwl/nest:application promotion --directory=services
 
 nx g @nrwl/nest:application user --directory=services 
 
+nx g @nrwl/nest:application auth --directory=services
+6001
 
 ## Gateway apps
 Ecommerce APIs

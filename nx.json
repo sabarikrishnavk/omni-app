@@ -39,6 +39,9 @@
     },
     "services-inventory": {
       "tags": []
+    },
+    "services-auth": {
+      "tags": []
     }
   }
 }
