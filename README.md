@@ -25,14 +25,26 @@ nx serve services-product
 <br>
 nx serve services-inventory
 <br>
+To start an auth server with JWT : nx serve services-auth
+<br>
 nx serve gateway-ecom
 <br>
 
 
+<br>
 docker image build -t omni-app/services-product -f docker/services-product.Dockerfile .
-
+<br>
 docker run --name services-product -p 8080:4001 -d omni-app/services-product
 
+To run Hasura instance locally:
+<br> 
+cd setup
+<br>
+docker-compose -f docker-hasura.yaml up
+<br>
+DBweaver > 127.0.0.1: 5432 //postgres:postgrespassword /postgres
+<br>
+Execute >> hasura.sql
 
 
 # OmniApps
