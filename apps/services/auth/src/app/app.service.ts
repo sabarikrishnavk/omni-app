@@ -39,6 +39,6 @@ export class AppService {
 export const users = Array<Users>();
 users.push({ usersId: '2f512af8-3882-46b8-bd65-283e1c6cc2b8', role:"guest", loginId: 'guest@test.com', password: 'test', firstName: 'Test', lastName: 'User' });
 users.push({ usersId: '7e79309c-b681-4021-bb45-2344b45cfef4', role:"registered", loginId: 'registered@test.com', password: 'test', firstName: 'Test', lastName: 'User' });
-users.push({ usersId: '7e79309c-b681-4021-bb45-2344b45cfef4', role:"csradmin", loginId: 'csradmin@test.com', password: 'test', firstName: 'Test', lastName: 'User' });
+users.push({ usersId: '9e79309c-b681-4021-bb45-2344b45cfef4', role:"csradmin", loginId: 'csradmin@test.com', password: 'test', firstName: 'Test', lastName: 'User' });
 
  

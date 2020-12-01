@@ -16,4 +16,10 @@ export class AppController {
   authenticate(@Body() login:Login) {
     return this.appService.authenticate(login);
   }
+  @Post("/event")
+  event(@Body() eventMessage:string) { 
+    console.log("eventMessage : "+ JSON.stringify(eventMessage));
+    let message = {"message":"OK"};
+    return message;
+  }
 }

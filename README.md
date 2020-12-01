@@ -111,6 +111,10 @@ nx generate @nrwl/nest:application cart --directory=middleware
 nx g @nrwl/react:library product --directory=widgets
 nx g @nrwl/react:library cart --directory=widgets
 
+
+openssl genrsa -out certs/server.key 2048
+openssl req -new -x509 -key certs/server.key -out certs/server.cert -days 365
+
 # OmniApp
 
 This project was generated using [Nx](https://nx.dev).
