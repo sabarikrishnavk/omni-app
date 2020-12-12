@@ -419,6 +419,62 @@
           }
         }
       }
+    },
+    "studio-dxm-ssr": {
+      "root": "apps/studio/dxm-ssr",
+      "sourceRoot": "apps/studio/dxm-ssr/src",
+      "projectType": "application",
+      "prefix": "studio-dxm-ssr",
+      "schematics": {},
+      "architect": {
+        "build": {
+          "builder": "@nrwl/node:build",
+          "options": {
+            "outputPath": "dist/apps/studio/dxm-ssr",
+            "main": "apps/studio/dxm-ssr/src/main.ts",
+            "tsConfig": "apps/studio/dxm-ssr/tsconfig.app.json",
+            "assets": ["apps/studio/dxm-ssr/src/assets"]
+          },
+          "configurations": {
+            "production": {
+              "optimization": true,
+              "extractLicenses": true,
+              "inspect": false,
+              "fileReplacements": [
+                {
+                  "replace": "apps/studio/dxm-ssr/src/environments/environment.ts",
+                  "with": "apps/studio/dxm-ssr/src/environments/environment.prod.ts"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@nrwl/node:execute",
+          "options": {
+            "buildTarget": "studio-dxm-ssr:build"
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:lint",
+          "options": {
+            "linter": "eslint",
+            "tsConfig": [
+              "apps/studio/dxm-ssr/tsconfig.app.json",
+              "apps/studio/dxm-ssr/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!apps/studio/dxm-ssr/**/*"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "apps/studio/dxm-ssr/jest.config.js",
+            "tsConfig": "apps/studio/dxm-ssr/tsconfig.spec.json",
+            "passWithNoTests": true
+          }
+        }
+      }
     }
   },
   "cli": {

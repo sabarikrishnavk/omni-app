@@ -45,6 +45,9 @@
     },
     "studio-dxm": {
       "tags": []
+    },
+    "studio-dxm-ssr": {
+      "tags": []
     }
   }
 }

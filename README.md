@@ -113,6 +113,7 @@ nx g @nrwl/react:library cart --directory=widgets
 
 ## Adding Studio applications for experience management
 
+nx generate @nrwl/nest:application dxm-ssr --directory=studio  
 nx generate @nrwl/nest:application dxm --directory=studio  
 
 
