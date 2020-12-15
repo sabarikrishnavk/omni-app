@@ -1,16 +1,34 @@
 <!DOCTYPE html>
 <html>
-{{#if page.header1}}
-{{> header1 }}
-{{/if}}
-{{#if page.header2}}
-{{> header2 }}
-{{/if}}
-<body>
-  {{ siteId }}
-  {{ pageContextId }}
-  {{ keyId }}
+<head>
+    {{#if page.meta1}}
+      {{> meta1}}
+    {{/if}}
+    {{#if page.meta2}}
+      {{> meta2 }}
+    {{/if}}
+</head>
+  {{ pagename }} 
+
+<body>   
+    {{#equal widgets.header "header1" }}
+      {{> header1 components=components}}
+    {{/equal}}
+
+    {{#equal widgets.header "header2" }}
+      {{> header2 components=components}}
+    {{/equal}} 
+
+    {{#if widgets.body1}}
+      {{> header1 }}
+    {{/if}}
+    {{#if widgets.body2}}
+      {{> header2 }}
+    {{/if}} 
+ 
+    {{#if widgets.footer}}
+      {{> footer }}
+    {{/if}} 
 </body>
-{{> footer }}
 
 </html>

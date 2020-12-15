@@ -12,31 +12,37 @@ export class AppController {
   @Get()
   @Render('index.hbs')
   root() {
-    return { message: 'Hello world!' ,page:{header2: true}};
+    return { message: 'Hello world!' ,widgets:{header: "header2"},components:{ menu: "menu1" }};
   }
 
-  @Get("site/:siteId")
-  @Render('index.hbs')
-  project(@Param('siteId') siteId:string, @Res() res:ServerResponse) { 
-    res.setHeader('site-id', siteId);
-    return { message: siteId,page:{header2: true}};
-  }
+  // @Get("site/:siteId")
+  // @Render('index.hbs')
+  // project(@Param('siteId') siteId:string, @Res() res:ServerResponse) { 
+  //   res.setHeader('site-id', siteId);
+  //   return { message: siteId,page:{header2: true}};
+  // }
+
+
   @Get(':pageContextId')
   @Render('index.hbs')
-  pageWithOutKey( @Req() req:Request , @Param('pageContextId') pageContextId:string ) {
+  async pageWithOutKey( @Req() req:Request , @Param('pageContextId') pageContextId:string ) {
 
-    let siteId= req.headers['site-id'];
-
+    let siteId  = req.headers['site-id'];
     console.log('Site Id: '+ siteId); 
     console.log('PageContextId Id: '+ pageContextId); 
 
-    return { siteId: siteId, pageContextId:pageContextId  ,page:{header1: true}};
+
+    let data = await this.appService.getPage(siteId.toString(),pageContextId);
+
+    console.log('site page details'+JSON.stringify(data));
+
+    return data.sitepages[0];
   }
   @Get(':pageContextId/:keyId')
   @Render('index.hbs')
   pageWithKey( @Req() req:Request , @Param('pageContextId') pageContextId:string , @Param('keyId') keyId:string) {
 
-    let siteId= req.headers['site-id'];
+    let siteId= req.headers['site-id'][0];
 
     console.log('Site Id: '+ siteId); 
     console.log('PageContextId Id: '+ pageContextId);
@@ -47,7 +53,7 @@ export class AppController {
 
   @Get('site/1/1')
   getSites(){
-    return this.appService.getData();
+    return this.appService.getSite();
   }
    
 }

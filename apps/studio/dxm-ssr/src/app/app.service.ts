@@ -4,7 +4,7 @@ import { GraphQLClient } from 'graphql-request'
 @Injectable()
 export class AppService { 
 
-  async getData(): Promise<any>{
+  async getSite(): Promise<any>{
     
     const graphQLClient = new GraphQLClient(endpoint, {
       credentials: 'include',
@@ -13,23 +13,59 @@ export class AppService {
     // graphQLClient.setHeader('authorization', 'Bearer MY_TOKEN');
     graphQLClient.setHeader('x-hasura-admin-secret', 'SECRET_KEY');
     
-    const data = await graphQLClient.request(operation);
+    const data = await graphQLClient.request(SITE_QUERY);
 
+    return data;
+  } 
+  async getPage(siteId: string, pageUrl: string): Promise<any>{
+    console.log('Site Id: '+ siteId); 
+    console.log('pageUrl Id: '+ pageUrl); 
+    
+    const graphQLClient = new GraphQLClient(endpoint, {
+      credentials: 'include',
+      mode: 'cors',
+    })
+    // graphQLClient.setHeader('authorization', 'Bearer MY_TOKEN');
+    graphQLClient.setHeader('x-hasura-admin-secret', 'SECRET_KEY');
+    
+    const data = await graphQLClient.request(PAGE_QUERY1+siteId + PAGE_QUERY2+ pageUrl+ PAGE_QUERY3 );
     return data;
   } 
  
 } 
 const endpoint= 'http://localhost:8080/v1/graphql';
-const operation = `
-  query MyQuery {
-    sites(where: {sitesid: {_eq: "3473b20b-728c-4e9f-8a0e-f1955d69f5a5"}}) {
-      description
-      details
-      domains
-      enddate
-      name
-      spec
-      startdate
-    }
+const SITE_QUERY = `
+query SitesQuery {
+  sites(where: {sitename: {_eq: "Galaxy"}}) {
+    description
+    details
+    domains
+    sitename
+    status
+    sitesid
+    startdate
+    enddate
   }
+}
+`;
+const PAGE_QUERY1 = `
+query SitePageQuery {
+  sitepages(where: {sitesid: {_eq: "`;  
+const PAGE_QUERY2 = `"}, pageurl: {_eq: "`; 
+const PAGE_QUERY3 = `"}}) {
+    components
+    enddate
+    metadata
+    pagename
+    pagetemplatesid
+    pageurl
+    sitepagesid
+    sitesid
+    startdate
+    status
+    version
+    widgets
+  }
+}
+
 `;
