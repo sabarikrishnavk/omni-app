@@ -8,27 +8,32 @@
       {{> meta2 }}
     {{/if}}
 </head>
-  {{ pagename }} 
 
 <body>   
     {{#equal widgets.header "header1" }}
-      {{> header1 components=components}}
+      {{> header1 components=components contents=contents }}
     {{/equal}}
 
     {{#equal widgets.header "header2" }}
       {{> header2 components=components}}
     {{/equal}} 
 
-    {{#if widgets.body1}}
-      {{> header1 }}
-    {{/if}}
-    {{#if widgets.body2}}
-      {{> header2 }}
-    {{/if}} 
+    {{#equal widgets.body "body0" }} 
+      {{> body0 }}
+    {{/equal}} 
+    {{#equal widgets.body "body1" }} 
+      {{> body1 }}
+    {{/equal}} 
+    {{#equal widgets.body "body2" }} 
+      {{> body2 }}
+    {{/equal}}  
+    {{#equal widgets.body "body3" }} 
+      {{> body3 }}
+    {{/equal}} 
  
-    {{#if widgets.footer}}
-      {{> footer }}
-    {{/if}} 
+    {{#equal widgets.footer "footer1"}}
+      {{> footer1 }}
+    {{/equal}} 
 </body>
 
 </html>

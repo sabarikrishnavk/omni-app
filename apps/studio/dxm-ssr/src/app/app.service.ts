@@ -62,10 +62,16 @@ const PAGE_QUERY3 = `"}}) {
     sitepagesid
     sitesid
     startdate
+    contents { 
+      details {
+        pagecontentname
+        contentname
+        contents
+      }
+    }
     status
     version
     widgets
   }
-}
-
+} 
 `;

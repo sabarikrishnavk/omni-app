@@ -40,15 +40,21 @@ export class AppController {
   }
   @Get(':pageContextId/:keyId')
   @Render('index.hbs')
-  pageWithKey( @Req() req:Request , @Param('pageContextId') pageContextId:string , @Param('keyId') keyId:string) {
+  async pageWithKey( @Req() req:Request , @Param('pageContextId') pageContextId:string , @Param('keyId') keyId:string) {
 
-    let siteId= req.headers['site-id'][0];
-
+    let siteId  = req.headers['site-id'];
     console.log('Site Id: '+ siteId); 
-    console.log('PageContextId Id: '+ pageContextId);
-    console.log('Key Id: '+ keyId);
+    console.log('PageContextId Id: '+ pageContextId); 
+    console.log('keyId : '+ keyId); 
 
-    return { siteId: siteId, pageContextId:pageContextId ,  keyId: keyId ,page:{header1: true}};
+    //Query content for page from via keyId and select the page corresponding to the key return
+    //For eg: if its products/sku1 ==select all pages configured for products/keyId and filter the page select for "sku1" else use the 0th element from array
+
+    let data = await this.appService.getPage(siteId.toString(),pageContextId+"/keyId");
+
+    console.log('site page details'+JSON.stringify(data));
+
+    return data.sitepages[0];
   }
 
   @Get('site/1/1')

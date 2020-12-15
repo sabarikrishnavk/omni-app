@@ -1,4 +1,9 @@
-Header 1 comes here
+{{#contents}}
+    {{#equal details.pagecontentname "header-banner"}}
+      <p>{{details.contents.text}}</p>
+    {{/equal}} 
+{{/contents}}
+
 {{#equal components.menu "menu1" }}
-  {{> menu1 }}
+   <p>{{> menu1 }}</p>
 {{/equal}}

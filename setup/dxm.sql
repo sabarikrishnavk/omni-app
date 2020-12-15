@@ -38,22 +38,23 @@ CREATE TABLE pagetemplates (
 	templatename    TEXT    NOT NULL,  
   	filename	    TEXT    NOT NULL, 
     hbsreference	JSONB   ,  
+    specs           JSONB   ,  
   	PRIMARY KEY (pagetemplatesid)
 );
-INSERT INTO pagetemplates (pagetemplatesid,templatename,filename,hbsreference) VALUES 
-(gen_random_uuid(),'Static Page','staticpage','{"widgets": ["header","body","footer"]}');
-INSERT INTO pagetemplates (pagetemplatesid,templatename,filename,hbsreference) VALUES 
-(gen_random_uuid(),'Home Page','homepage','{"widgets": ["header","body","footer"]}');
-INSERT INTO pagetemplates (pagetemplatesid,templatename,filename,hbsreference) VALUES 
-(gen_random_uuid(),'PLP Page','plppage','{"widgets": ["header","body","footer"]}');
-INSERT INTO pagetemplates (pagetemplatesid,templatename,filename,hbsreference) VALUES 
-(gen_random_uuid(),'PDP Page','pdppage','{"widgets": ["header","body","footer"]}');
-INSERT INTO pagetemplates (pagetemplatesid,templatename,filename,hbsreference) VALUES 
-(gen_random_uuid(),'Cart Page','cartpage','{"widgets": ["header","body","footer"]}');
-INSERT INTO pagetemplates (pagetemplatesid,templatename,filename,hbsreference) VALUES 
-(gen_random_uuid(),'Checkout Page','checkoutpage','{"widgets": ["header","body","footer"]}');
-INSERT INTO pagetemplates (pagetemplatesid,templatename,filename,hbsreference) VALUES 
-(gen_random_uuid(),'Order Page','orderpage','{"widgets": ["header","body","footer"]}');
+INSERT INTO pagetemplates (pagetemplatesid,templatename,filename,hbsreference,specs) VALUES 
+(gen_random_uuid(),'Static Page','staticpage','{"widgets": ["header","body","footer"]}','""');
+INSERT INTO pagetemplates (pagetemplatesid,templatename,filename,hbsreference,specs) VALUES 
+(gen_random_uuid(),'Home Page','homepage','{"widgets": ["header","body","footer"]}','""');
+INSERT INTO pagetemplates (pagetemplatesid,templatename,filename,hbsreference,specs) VALUES 
+(gen_random_uuid(),'PLP Page','plppage','{"widgets": ["header","body","footer"]}','""');
+INSERT INTO pagetemplates (pagetemplatesid,templatename,filename,hbsreference,specs) VALUES 
+(gen_random_uuid(),'PDP Page','pdppage','{"widgets": ["header","body","footer"]}','""');
+INSERT INTO pagetemplates (pagetemplatesid,templatename,filename,hbsreference,specs) VALUES 
+(gen_random_uuid(),'Cart Page','cartpage','{"widgets": ["header","body","footer"]}','""');
+INSERT INTO pagetemplates (pagetemplatesid,templatename,filename,hbsreference,specs) VALUES 
+(gen_random_uuid(),'Checkout Page','checkoutpage','{"widgets": ["header","body","footer"]}','""');
+INSERT INTO pagetemplates (pagetemplatesid,templatename,filename,hbsreference,specs) VALUES 
+(gen_random_uuid(),'Order Page','orderpage','{"widgets": ["header","body","footer"]}','""');
 
 -- (html tags /images banner /text banner /form)
 -- drop table contenttemplates; 
@@ -154,30 +155,35 @@ CREATE TABLE sitecontents (
   startdate             DATE    NOT NULL,
   enddate     	        DATE    NOT NULL,  
   contents              JSONB   NOT NULL, 
+  pagecontentname       text,
   PRIMARY KEY (sitecontentsid)
 );
-INSERT INTO sitecontents (sitecontentsid,contentname,sitesid,contenttemplatesid,status,startdate,enddate,contents) VALUES 
+INSERT INTO sitecontents (sitecontentsid,contentname,sitesid,contenttemplatesid,status,startdate,enddate,pagecontentname,contents) VALUES 
 (gen_random_uuid(),'Header Banner',(select sitesid from sites where sitename ='Galaxy'),
 (select contenttemplatesid from contenttemplates c  where hbsreference ='header-banner'),
 'Active','2020-12-11','2099-12-31',
+'header-banner',
 '{"text":   "Welcome to Galaxy.com"}');
 
-INSERT INTO sitecontents (sitecontentsid,contentname,sitesid,contenttemplatesid,status,startdate,enddate,contents) VALUES 
+INSERT INTO sitecontents (sitecontentsid,contentname,sitesid,contenttemplatesid,status,startdate,enddate,pagecontentname,contents) VALUES 
 (gen_random_uuid(),'HomePage Banner 1' ,(select sitesid from sites where sitename ='Galaxy'),
-(select contenttemplatesid from contenttemplates c  where hbsreference ='header-banner'),
+(select contenttemplatesid from contenttemplates c  where hbsreference ='text-banner'),
 'Active','2020-12-11','2099-12-31',
+'home-page-row1',
 '{"text":   "HomePage Banner 1"}');
 
-INSERT INTO sitecontents (sitecontentsid,contentname,sitesid,contenttemplatesid,status,startdate,enddate,contents) VALUES 
+INSERT INTO sitecontents (sitecontentsid,contentname,sitesid,contenttemplatesid,status,startdate,enddate,pagecontentname,contents) VALUES 
 (gen_random_uuid(),'HomePage Banner 2' ,(select sitesid from sites where sitename ='Galaxy'),
-(select contenttemplatesid from contenttemplates c  where hbsreference ='header-banner'),
+(select contenttemplatesid from contenttemplates c  where hbsreference ='text-banner'),
 'Active','2020-12-11','2099-12-31',
+'home-page-row2',
 '{"text":   "HomePage Banner 2"}');
 
-INSERT INTO sitecontents (sitecontentsid,contentname,sitesid,contenttemplatesid,status,startdate,enddate,contents) VALUES 
+INSERT INTO sitecontents (sitecontentsid,contentname,sitesid,contenttemplatesid,status,startdate,enddate,pagecontentname,contents) VALUES 
 (gen_random_uuid(),'HomePage Banner 3' ,(select sitesid from sites where sitename ='Galaxy'),
-(select contenttemplatesid from contenttemplates c  where hbsreference ='header-banner'),
+(select contenttemplatesid from contenttemplates c  where hbsreference ='text-banner'),
 'Active','2020-12-11','2099-12-31',
+'home-page-row3',
 '{"text":   "HomePage Banner 3"}');
 
 -- drop table sitepages;
@@ -192,20 +198,56 @@ CREATE TABLE sitepages  (
   startdate         DATE    NOT NULL,
   enddate     	    DATE    NOT NULL,
   widgets           JSONB   NOT NULL, 
-  components        JSONB   NOT NULL, 
-  sitecontents      JSONB   NOT NULL,
+  components        JSONB   NOT NULL,
   metadata          JSONB   NOT NULL,
   PRIMARY KEY (sitepagesid)
 );
 
 INSERT INTO sitepages (sitepagesid,sitesid,pagetemplatesid,pagename,pageurl,"version",status,startdate,enddate, widgets,components,metadata) VALUES 
-(gen_random_uuid(),
-(select sitesid from sites where sitename ='Galaxy'),
-(select pagetemplatesid from pagetemplates where filename='homepage'),
+(gen_random_uuid(), (select sitesid from sites where sitename ='Galaxy'), (select pagetemplatesid from pagetemplates where filename='homepage'),
 'Galaxy Home Page','shop',1,'Active','2020-12-01','2021-12-31',
 '{"header": "header1","footer":"footer1","body":"body3"}',
-'{"row1column0": {"content":"home-page-row1"} , "row2column0":{"content":"home-page-row2"}  , "row3column0": {"content":"home-page-row3"} }',
-'{"home-page-row1": "HomePage Banner 1" , "row2column0":"HomePage Banner 2" , "row3column0": "HomePage Banner 3"}', 
+'{"row1column0": {"content":"home-page-row1"} , "row2column0":{"content":"home-page-row2"}  , "row3column0": {"content":"home-page-row3"} }', 
 '{"description": "Home Page"}' ) ;
 
+
+INSERT INTO sitepages (sitepagesid,sitesid,pagetemplatesid,pagename,pageurl,"version",status,startdate,enddate, widgets,components,metadata) VALUES 
+(gen_random_uuid(), (select sitesid from sites where sitename ='Galaxy'), (select pagetemplatesid from pagetemplates where filename='pdppage'),
+'Galaxy PDP Page','products/keyId',1,'Active','2020-12-01','2021-12-31',
+'{"header": "header1","footer":"footer1","body":"body0"}',
+'{"row1column0": {"component":"product-card"} }', 
+'{"description": "Home Page"}' ) ;
+
+--drop table sitepagecontents;
+CREATE TABLE sitepagecontents (
+  sitepagecontentsid        UUID    NOT NULL DEFAULT gen_random_uuid(),
+  sitepagesid               UUID ,
+  sitecontents              UUID , 
+  PRIMARY KEY (sitepagecontentsid)
+);
+INSERT INTO sitepagecontents(sitepagecontentsid, sitepagesid,sitecontents) VALUES
+(gen_random_uuid() ,
+(select sitepagesid from sitepages s where pagename ='Galaxy Home Page') ,  
+(select sitecontentsid from sitecontents s where pagecontentname='header-banner')
+);
+INSERT INTO sitepagecontents(sitepagecontentsid, sitepagesid,sitecontents) VALUES
+(gen_random_uuid() ,
+(select sitepagesid from sitepages s where pagename ='Galaxy PDP Page') ,  
+(select sitecontentsid from sitecontents s where pagecontentname='header-banner')
+);
+INSERT INTO sitepagecontents(sitepagecontentsid, sitepagesid,sitecontents) VALUES
+(gen_random_uuid() ,
+(select sitepagesid from sitepages s where pagename ='Galaxy Home Page') ,  
+(select sitecontentsid from sitecontents s where pagecontentname='home-page-row1')
+);
+INSERT INTO sitepagecontents(sitepagecontentsid, sitepagesid,sitecontents) VALUES
+(gen_random_uuid() ,
+(select sitepagesid from sitepages s where pagename ='Galaxy Home Page') ,  
+(select sitecontentsid from sitecontents s where pagecontentname='home-page-row2')
+);
+INSERT INTO sitepagecontents(sitepagecontentsid, sitepagesid,sitecontents) VALUES
+(gen_random_uuid() ,
+(select sitepagesid from sitepages s where pagename ='Galaxy Home Page') ,  
+(select sitecontentsid from sitecontents s where pagecontentname='home-page-row2')
+);
 
