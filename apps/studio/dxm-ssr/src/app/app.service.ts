@@ -3,7 +3,21 @@ import { GraphQLClient } from 'graphql-request'
  
 @Injectable()
 export class AppService { 
+  async getData(query:string): Promise<any>{
 
+
+    const graphQLClient = new GraphQLClient(endpoint, {
+      credentials: 'include',
+      mode: 'cors',
+    })
+    // graphQLClient.setHeader('authorization', 'Bearer MY_TOKEN');
+    graphQLClient.setHeader('x-hasura-admin-secret', 'SECRET_KEY');
+    
+    console.log('query firing: '+ query);
+    const data = await graphQLClient.request(query);
+
+    return data;
+  }
   async getSite(): Promise<any>{
     
     const graphQLClient = new GraphQLClient(endpoint, {
@@ -27,8 +41,10 @@ export class AppService {
     })
     // graphQLClient.setHeader('authorization', 'Bearer MY_TOKEN');
     graphQLClient.setHeader('x-hasura-admin-secret', 'SECRET_KEY');
-    
-    const data = await graphQLClient.request(PAGE_QUERY1+siteId + PAGE_QUERY2+ pageUrl+ PAGE_QUERY3 );
+    let sitePageQuery = PAGE_QUERY1+siteId + PAGE_QUERY2+ pageUrl+ PAGE_QUERY3;
+
+    console.log('query firing: '+ sitePageQuery);
+    const data = await graphQLClient.request(sitePageQuery );
     return data;
   } 
  
@@ -53,15 +69,15 @@ query SitePageQuery {
   sitepages(where: {sitesid: {_eq: "`;  
 const PAGE_QUERY2 = `"}, pageurl: {_eq: "`; 
 const PAGE_QUERY3 = `"}}) {
-    components
-    enddate
     metadata
     pagename
-    pagetemplatesid
     pageurl
-    sitepagesid
-    sitesid
-    startdate
+    templates {
+      templatename
+      hbsreference
+      filename
+      specs
+    }
     contents { 
       details {
         pagecontentname
@@ -69,9 +85,8 @@ const PAGE_QUERY3 = `"}}) {
         contents
       }
     }
-    status
-    version
     widgets
+    components
   }
 } 
 `;

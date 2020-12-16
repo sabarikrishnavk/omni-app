@@ -48,7 +48,7 @@ INSERT INTO pagetemplates (pagetemplatesid,templatename,filename,hbsreference,sp
 INSERT INTO pagetemplates (pagetemplatesid,templatename,filename,hbsreference,specs) VALUES 
 (gen_random_uuid(),'PLP Page','plppage','{"widgets": ["header","body","footer"]}','""');
 INSERT INTO pagetemplates (pagetemplatesid,templatename,filename,hbsreference,specs) VALUES 
-(gen_random_uuid(),'PDP Page','pdppage','{"widgets": ["header","body","footer"]}','""');
+('e8ffdb40-e8ef-4c0f-8478-da5d7a9c2227','PDP Page','pdppage','{"widgets": ["header", "body", "footer"]}','{"schema": "query ProductPageQuery { products(where: {sku: {_eq: #keyId }}) { details productsid sku } }"}');
 INSERT INTO pagetemplates (pagetemplatesid,templatename,filename,hbsreference,specs) VALUES 
 (gen_random_uuid(),'Cart Page','cartpage','{"widgets": ["header","body","footer"]}','""');
 INSERT INTO pagetemplates (pagetemplatesid,templatename,filename,hbsreference,specs) VALUES 
@@ -216,7 +216,7 @@ INSERT INTO sitepages (sitepagesid,sitesid,pagetemplatesid,pagename,pageurl,"ver
 'Galaxy PDP Page','products/keyId',1,'Active','2020-12-01','2021-12-31',
 '{"header": "header1","footer":"footer1","body":"body0"}',
 '{"row1column0": {"component":"product-card"} }', 
-'{"description": "Home Page"}' ) ;
+'{"description": "PDP Page"}' ) ;
 
 --drop table sitepagecontents;
 CREATE TABLE sitepagecontents (
@@ -250,4 +250,7 @@ INSERT INTO sitepagecontents(sitepagecontentsid, sitepagesid,sitecontents) VALUE
 (select sitepagesid from sitepages s where pagename ='Galaxy Home Page') ,  
 (select sitecontentsid from sitecontents s where pagecontentname='home-page-row2')
 );
+
+
+
 

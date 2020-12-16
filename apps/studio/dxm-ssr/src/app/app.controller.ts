@@ -50,11 +50,22 @@ export class AppController {
     //Query content for page from via keyId and select the page corresponding to the key return
     //For eg: if its products/sku1 ==select all pages configured for products/keyId and filter the page select for "sku1" else use the 0th element from array
 
-    let data = await this.appService.getPage(siteId.toString(),pageContextId+"/keyId");
+    let sitePagesData = await this.appService.getPage(siteId.toString(),pageContextId+"/keyId");
 
-    console.log('site page details'+JSON.stringify(data));
+    console.log('site page details'+JSON.stringify(sitePagesData));
+    let query= sitePagesData.sitepages[0].templates.specs.schema.replace('#keyId','"'+keyId+'"'); 
+    //console.log('query to fire : '+ query); 
 
-    return data.sitepages[0];
+    let data =await this.appService.getData(query);
+    console.log('Key data : '+ JSON.stringify(data)); 
+
+    let sitePageData = sitePagesData.sitepages[0];
+    if(pageContextId =='products'){
+      sitePageData.pageData=data.products[0];
+    }
+
+
+    return sitePageData;
   }
 
   @Get('site/1/1')

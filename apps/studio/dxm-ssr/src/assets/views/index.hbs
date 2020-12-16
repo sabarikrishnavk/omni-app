@@ -18,8 +18,10 @@
       {{> header2 components=components}}
     {{/equal}} 
 
+   
+
     {{#equal widgets.body "body0" }} 
-      {{> body0 }}
+      {{> body0 pageData=pageData components=components}}
     {{/equal}} 
     {{#equal widgets.body "body1" }} 
       {{> body1 }}
