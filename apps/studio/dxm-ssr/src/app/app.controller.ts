@@ -29,6 +29,9 @@ export class AppController {
 
     let siteId  = req.headers['site-id'];
     console.log('Site Id: '+ siteId); 
+    if(pageContextId =='favicon.ico' || siteId == null){
+      return ;
+    }
     console.log('PageContextId Id: '+ pageContextId); 
 
 

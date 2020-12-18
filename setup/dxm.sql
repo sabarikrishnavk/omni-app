@@ -46,6 +46,8 @@ INSERT INTO pagetemplates (pagetemplatesid,templatename,filename,hbsreference,sp
 INSERT INTO pagetemplates (pagetemplatesid,templatename,filename,hbsreference,specs) VALUES 
 (gen_random_uuid(),'Home Page','homepage','{"widgets": ["header","body","footer"]}','""');
 INSERT INTO pagetemplates (pagetemplatesid,templatename,filename,hbsreference,specs) VALUES 
+(gen_random_uuid(),'Aisle Page','aislepage','{"widgets": ["header","body","footer"]}','""');
+INSERT INTO pagetemplates (pagetemplatesid,templatename,filename,hbsreference,specs) VALUES 
 (gen_random_uuid(),'PLP Page','plppage','{"widgets": ["header","body","footer"]}','""');
 INSERT INTO pagetemplates (pagetemplatesid,templatename,filename,hbsreference,specs) VALUES 
 ('e8ffdb40-e8ef-4c0f-8478-da5d7a9c2227','PDP Page','pdppage','{"widgets": ["header", "body", "footer"]}','{"schema": "query ProductPageQuery { products(where: {sku: {_eq: #keyId }}) { details productsid sku } }"}');

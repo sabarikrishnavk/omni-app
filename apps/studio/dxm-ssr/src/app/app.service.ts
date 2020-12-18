@@ -83,6 +83,12 @@ const PAGE_QUERY3 = `"}}) {
         pagecontentname
         contentname
         contents
+        templates {
+          filename
+          hbsreference
+          templatename
+          specs
+        }
       }
     }
     widgets

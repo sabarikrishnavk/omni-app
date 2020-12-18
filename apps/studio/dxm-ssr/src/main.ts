@@ -44,6 +44,7 @@ async function bootstrap() {
 
   //Register a new helper
   hbs.registerHelper('equal', function(lvalue, rvalue, options) {
+    // console.log('equal :'+ lvalue + " : "+ rvalue);
     if (arguments.length < 3)
         throw new Error("Handlebars Helper equal needs 2 parameters");
     if( lvalue!=rvalue ) {
@@ -52,9 +53,36 @@ async function bootstrap() {
         return options.fn(this);
     }
   }); 
+
+  hbs.registerHelper('contains', function(key, options) {
+    // console.log('contains :'+ key);
+    if (key !=null && key != 'undefined') { 
+      return options.fn(this); 
+    } else { 
+      return options.inverse(this);
+    }
+  }); 
+
   hbs.registerHelper('partial',function (name) {
-    console.log('loading partial: '+name);
+    // console.log('partial: '+name);
     return name;
+  });
+  hbs.registerHelper('content',function (contents, key, options) {
+
+    var details = null; 
+    for (var i=0;i <contents.length;i ++){
+      var content = contents[i];
+      if(content.details.pagecontentname == key){
+        console.log('content: '+content.details.pagecontentname +' : '+ key);
+        details = content.details;
+      } 
+    }
+    if (details !=null ) { 
+      console.log('content: '+details.pagecontentname+' : '+ key);
+      return options.fn(details); 
+    } else { 
+      return options.inverse(this);
+    }
   });
   
   const port = process.env.PORT || 3333;

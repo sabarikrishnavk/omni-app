@@ -1,9 +1,6 @@
-{{#contents}}
-    {{#equal details.pagecontentname "header-banner"}}
-      <p>{{details.contents.text}}</p>
-    {{/equal}} 
-{{/contents}}
-
+{{#content contents "header-banner" }} 
+        <p> {{this.contents.text}}</p> 
+{{/content}} 
 {{#equal components.menu "menu1" }}
    <p>{{> menu1 }}</p>
 {{/equal}}
