@@ -11,26 +11,26 @@
 
 <body>   
     {{#equal widgets.header "header1" }}
-      {{> header1 components=components contents=contents }}
+      {{> header1 components=components pagecontents=pagecontents }}
     {{/equal}}
 
     {{#equal widgets.header "header2" }}
-      {{> header2 components=components}}
+      {{> header2 components=components pagecontents=pagecontents}}
     {{/equal}} 
 
    
 
     {{#equal widgets.body "body0" }} 
-      {{> body0 pageData=pageData components=components}}
+      {{> body0 pageData=pageData components=components pagecontents=pagecontents}}
     {{/equal}} 
     {{#equal widgets.body "body1" }} 
-      {{> body1 pageData=pageData components=components}}
+      {{> body1 pageData=pageData components=components pagecontents=pagecontents}}
     {{/equal}} 
     {{#equal widgets.body "body2" }} 
-      {{> body2 pageData=pageData components=components}}
+      {{> body2 pageData=pageData components=components pagecontents=pagecontents}}
     {{/equal}}  
     {{#equal widgets.body "body3" }} 
-      {{> body3 pageData=pageData components=components}}
+      {{> body3 pageData=pageData components=components pagecontents=pagecontents}}
     {{/equal}} 
  
     {{#equal widgets.footer "footer1"}}

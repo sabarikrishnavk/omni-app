@@ -1,22 +1,19 @@
-<div>Body 0 comes here</div>
-  
+<div>Body 0 comes here</div> 
 
-     <p>Content: {{components.row1column0.content}}  </p>
-     <p>Component: {{components.row1column0.component}} </p> 
-
-{{#contains components.row1column0.content}}  
-     <p>Content --> {{components.row1column0.content}}  </p>
-     {{#contents}}
-     {{#equal details.pagecontentname components.row1column0.content }}
-          <p>{{details.contents.text}}</p>
-     {{/equal}} 
-     {{/contents}}
+<p>row1column0</p>
+{{#contains components.row1column0.content}}   
+     {{#content pagecontents components.row1column0.content }} 
+          <p>Content template --> {{this.templates.filename}}</p>
+          {{>( partial this.templates.filename content=this )}} 
+ 
+     {{/content}} 
 {{/contains }}  
 
 {{#contains components.row1column0.component}}  
      <p>Component  --> {{components.row1column0.component}} </p> 
      {{>( partial components.row1column0.component pageData=pageData )}} 
 {{/contains }} 
+
 
 
 

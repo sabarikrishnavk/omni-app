@@ -1,6 +1,54 @@
 <div>Body 2 comes here</div>
 
-<p>row1column0</p>
+<p>row1column0</p> 
+{{#contains components.row1column0.content}}   
+     {{#content pagecontents components.row1column0.content }} 
+          <p>Content template --> {{this.templates.filename}}</p>
+          {{>( partial this.templates.filename content=this )}} 
+ 
+     {{/content}} 
+{{/contains }}  
+
+{{#contains components.row1column0.component}}  
+     <p>Component  --> {{components.row1column0.component}} </p> 
+     {{>( partial components.row1column0.component pageData=pageData )}} 
+{{/contains }} 
+
 <p>row2column1</p>
+
+{{#contains components.row2column1.content}}   
+     {{#content pagecontents components.row2column1.content }} 
+          <p>Content template --> {{this.templates.filename}}</p>
+          {{>( partial this.templates.filename content=this )}} 
+ 
+     {{/content}} 
+{{/contains }}  
+{{#contains components.row2column1.component}}  
+     <p>Component  --> {{components.row2column1.component}} </p> 
+     {{>( partial components.row2column1.component pageData=pageData )}} 
+{{/contains }} 
 <p>row2column2</p>
+{{#contains components.row2column2.content}}   
+     {{#content pagecontents components.row2column2.content }} 
+          <p>Content template --> {{this.templates.filename}}</p>
+          {{>( partial this.templates.filename content=this )}} 
+ 
+     {{/content}} 
+{{/contains }}  
+{{#contains components.row2column2.component}}  
+     <p>Component  --> {{components.row2column2.component}} </p> 
+     {{>( partial components.row2column2.component pageData=pageData )}} 
+{{/contains }} 
 <p>row3column0</p>
+
+{{#contains components.row3column0.content}}   
+     {{#content pagecontents components.row3column0.content }} 
+          <p>Content template --> {{this.templates.filename}}</p>
+          {{>( partial this.templates.filename content=this )}} 
+ 
+     {{/content}} 
+{{/contains }}  
+{{#contains components.row3column0.component}}  
+     <p>Component  --> {{components.row3column0.component}} </p> 
+     {{>( partial components.row3column0.component pageData=pageData )}} 
+{{/contains }}  

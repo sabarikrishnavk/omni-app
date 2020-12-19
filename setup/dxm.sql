@@ -105,6 +105,9 @@ INSERT INTO componenttemplates (componenttemplatesid,templatename,filename,hbsre
 (gen_random_uuid(),'product-card','product-card','product-card','{"allowedpages": ["static", "pdp", "plp", "cart","checkout", "myaccount"]}');
 
 INSERT INTO componenttemplates (componenttemplatesid,templatename,filename,hbsreference,restrictions) VALUES 
+(gen_random_uuid(),'add-to-cart','add-to-cart','add-to-cart','{"allowedpages": [ "pdp", "plp"]}'); 
+
+INSERT INTO componenttemplates (componenttemplatesid,templatename,filename,hbsreference,restrictions) VALUES 
 (gen_random_uuid(),'cart errors','cart-errors','cart-errors','{"allowedpages": ["cart", "checkout"]}'); 
 INSERT INTO componenttemplates (componenttemplatesid,templatename,filename,hbsreference,restrictions) VALUES 
 (gen_random_uuid(),'cart item','cart-items','cart-items','{"allowedpages": ["cart", "checkout"]}');
@@ -216,8 +219,8 @@ INSERT INTO sitepages (sitepagesid,sitesid,pagetemplatesid,pagename,pageurl,"ver
 INSERT INTO sitepages (sitepagesid,sitesid,pagetemplatesid,pagename,pageurl,"version",status,startdate,enddate, widgets,components,metadata) VALUES 
 (gen_random_uuid(), (select sitesid from sites where sitename ='Galaxy'), (select pagetemplatesid from pagetemplates where filename='pdppage'),
 'Galaxy PDP Page','products/keyId',1,'Active','2020-12-01','2021-12-31',
-'{"header": "header1","footer":"footer1","body":"body0"}',
-'{"row1column0": {"component":"product-card"} }', 
+'{"header": "header1","footer":"footer1","body":"body2"}',
+'{"row1column0": {"content":"pdp-banner"},"row2column1": {"component":"product-card"} ,"row2column2": {"component":"add-to-cart"}, "row3column0": {"component":"product-review"} }', 
 '{"description": "PDP Page"}' ) ;
 
 --drop table sitepagecontents;
@@ -250,7 +253,7 @@ INSERT INTO sitepagecontents(sitepagecontentsid, sitepagesid,sitecontents) VALUE
 INSERT INTO sitepagecontents(sitepagecontentsid, sitepagesid,sitecontents) VALUES
 (gen_random_uuid() ,
 (select sitepagesid from sitepages s where pagename ='Galaxy Home Page') ,  
-(select sitecontentsid from sitecontents s where pagecontentname='home-page-row2')
+(select sitecontentsid from sitecontents s where pagecontentname='home-page-row3')
 );
 
 

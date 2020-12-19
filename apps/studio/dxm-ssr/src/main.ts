@@ -15,7 +15,7 @@ async function bootstrap() {
   app.setViewEngine('hbs');  
   //Load partials files from different folders recursively
   var dir = join(__dirname, '/assets/views/partials/');
-//console.log(partialsDir);
+//Logger.log(partialsDir);
 
   const loadFiles = (dir, filelist = []) => {
     fs.readdirSync(dir).forEach(file => {
@@ -44,7 +44,7 @@ async function bootstrap() {
 
   //Register a new helper
   hbs.registerHelper('equal', function(lvalue, rvalue, options) {
-    // console.log('equal :'+ lvalue + " : "+ rvalue);
+    // Logger.log('equal :'+ lvalue + " : "+ rvalue);
     if (arguments.length < 3)
         throw new Error("Handlebars Helper equal needs 2 parameters");
     if( lvalue!=rvalue ) {
@@ -55,7 +55,7 @@ async function bootstrap() {
   }); 
 
   hbs.registerHelper('contains', function(key, options) {
-    // console.log('contains :'+ key);
+    // Logger.log('contains :'+ key);
     if (key !=null && key != 'undefined') { 
       return options.fn(this); 
     } else { 
@@ -64,21 +64,24 @@ async function bootstrap() {
   }); 
 
   hbs.registerHelper('partial',function (name) {
-    // console.log('partial: '+name);
+    // Logger.log('partial: '+name);
     return name;
   });
-  hbs.registerHelper('content',function (contents, key, options) {
+  hbs.registerHelper('content',function (pagecontents, key, options) {
+    // Logger.log('pagecontents: '+pagecontents);
 
     var details = null; 
-    for (var i=0;i <contents.length;i ++){
-      var content = contents[i];
-      if(content.details.pagecontentname == key){
-        console.log('content: '+content.details.pagecontentname +' : '+ key);
-        details = content.details;
-      } 
+    if(pagecontents !=null){ 
+      for (var i=0;i <pagecontents.length;i ++){
+        var content = pagecontents[i];
+        if(content.details.pagecontentname == key){
+          console.log('content: '+content.details.pagecontentname +' : '+ key);
+          details = content.details;
+        } 
+      }
     }
     if (details !=null ) { 
-      console.log('content: '+details.pagecontentname+' : '+ key);
+      // Logger.log('content: '+details.pagecontentname+' : '+ key);
       return options.fn(details); 
     } else { 
       return options.inverse(this);

@@ -78,7 +78,7 @@ const PAGE_QUERY3 = `"}}) {
       filename
       specs
     }
-    contents { 
+    pagecontents { 
       details {
         pagecontentname
         contentname

@@ -1,14 +1,12 @@
 <div>Body 3 comes here</div>
  
-    <p>Content: {{components.row1column0.content}}  </p>
-     <p>Component: {{components.row1column0.component}} </p> 
 
+<p>row1column0</p> 
 {{#contains components.row1column0.content}}   
-     {{#content contents components.row1column0.content }}
-        <p>pagecontentname --> {{this.pagecontentname}}</p>
-        <p>contentname --> {{this.contentname}}</p>
-        <p>contents.text--> {{this.contents.text}}</p>
-        <p>templates.filename--> {{this.templates.filename}}</p>
+     {{#content pagecontents components.row1column0.content }} 
+          <p>Content template --> {{this.templates.filename}}</p>
+          {{>( partial this.templates.filename content=this )}} 
+ 
      {{/content}} 
 {{/contains }}  
 
@@ -18,4 +16,28 @@
 {{/contains }} 
 
 <p>row2column0</p> 
+
+{{#contains components.row2column0.content}}   
+     {{#content pagecontents components.row2column0.content }} 
+          <p>Content template --> {{this.templates.filename}}</p>
+          {{>( partial this.templates.filename content=this )}} 
+ 
+     {{/content}} 
+{{/contains }}  
+{{#contains components.row1column0.component}}  
+     <p>Component  --> {{components.row2column0.component}} </p> 
+     {{>( partial components.row1column0.component pageData=pageData )}} 
+{{/contains }} 
 <p>row3column0</p>
+
+{{#contains components.row3column0.content}}   
+     {{#content pagecontents components.row3column0.content }} 
+          <p>Content template --> {{this.templates.filename}}</p>
+          {{>( partial this.templates.filename content=this )}} 
+ 
+     {{/content}} 
+{{/contains }}  
+{{#contains components.row3column0.component}}  
+     <p>Component  --> {{components.row3column0.component}} </p> 
+     {{>( partial components.row3column0.component pageData=pageData )}} 
+{{/contains }} 
