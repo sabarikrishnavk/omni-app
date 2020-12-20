@@ -1,8 +1,6 @@
-{{#content pagecontents "header-banner" }} 
-        <p> {{this.contents.text}}</p> 
-{{/content}} 
 
 {{#contains components.menu}}  
-     <p>Component  --> {{components.menu}} </p> 
      {{>( partial components.menu pageData=pageData )}} 
 {{/contains }} 
+     
+{{>( partial "header-banner" pageData=pageData configData=configData)}} 

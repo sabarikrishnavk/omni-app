@@ -172,7 +172,7 @@ INSERT INTO sitecontents (sitecontentsid,contentname,sitesid,contenttemplatesid,
 (select contenttemplatesid from contenttemplates c  where hbsreference ='header-banner'),
 'Active','2020-12-11','2099-12-31',
 'header-banner',
-'{"text":   "Welcome to Galaxy.com"}');
+'{"text":   "Welcome to Galaxy.com","image":"/img/logo.png"}');
 
 INSERT INTO sitecontents (sitecontentsid,contentname,sitesid,contenttemplatesid,status,startdate,enddate,pagecontentname,contents) VALUES 
 (gen_random_uuid(),'HomePage Banner 1' ,(select sitesid from sites where sitename ='Galaxy'),
@@ -250,6 +250,12 @@ INSERT INTO sitepagecontents(sitepagecontentsid, sitepagesid,sitecontents) VALUE
 INSERT INTO sitepagecontents(sitepagecontentsid, sitepagesid,sitecontents) VALUES
 (gen_random_uuid() ,
 (select sitepagesid from sitepages s where pagename ='Galaxy PDP Page') ,  
+(select sitecontentsid from sitecontents s where pagecontentname='header-banner')
+);
+
+INSERT INTO sitepagecontents(sitepagecontentsid, sitepagesid,sitecontents) VALUES
+(gen_random_uuid() ,
+(select sitepagesid from sitepages s where pagename ='Galaxy Cart Page') ,  
 (select sitecontentsid from sitecontents s where pagecontentname='header-banner')
 );
 INSERT INTO sitepagecontents(sitepagecontentsid, sitepagesid,sitecontents) VALUES

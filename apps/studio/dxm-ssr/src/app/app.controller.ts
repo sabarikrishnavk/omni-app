@@ -9,6 +9,7 @@ import { AppService } from './app.service';
 export class AppController {
   constructor(private readonly appService: AppService) {}
 
+  DAM_URL:string = "http://localhost:3000/dam/";
   @Get() 
   root(@Req() req:Request) {
     let siteId  = req.headers['site-id'];
@@ -31,11 +32,13 @@ export class AppController {
     console.log('PageContextId Id: '+ pageContextId); 
 
 
-    let data = await this.appService.getPage(siteId.toString(),pageContextId);
+    let sitePagesData = await this.appService.getPage(siteId.toString(),pageContextId);
 
-    console.log('site page details'+JSON.stringify(data));
+    console.log('site page details'+JSON.stringify(sitePagesData));
+    let sitePageData = sitePagesData.sitepages[0];
+    sitePageData.configData={"dam-url":this.DAM_URL};
 
-    return data.sitepages[0];
+    return sitePageData;
   }
   @Get(':pageContextId/:keyId')
   @Render('index.hbs')
@@ -65,7 +68,7 @@ export class AppController {
     if(pageContextId =='cart'){
       sitePageData.pageData=data.carts[0];
     }
-    sitePageData.configData={"dam-url":"http://localhost:3000/dam/"};
+    sitePageData.configData={"dam-url":this.DAM_URL};
 
     return sitePageData;
   } 
