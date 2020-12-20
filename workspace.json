@@ -364,20 +364,20 @@
         }
       }
     },
-    "studio-dxm": {
-      "root": "apps/studio/dxm",
-      "sourceRoot": "apps/studio/dxm/src",
+    "studio-dam": {
+      "root": "apps/studio/dam",
+      "sourceRoot": "apps/studio/dam/src",
       "projectType": "application",
-      "prefix": "studio-dxm",
+      "prefix": "studio-dam",
       "schematics": {},
       "architect": {
         "build": {
           "builder": "@nrwl/node:build",
           "options": {
-            "outputPath": "dist/apps/studio/dxm",
-            "main": "apps/studio/dxm/src/main.ts",
-            "tsConfig": "apps/studio/dxm/tsconfig.app.json",
-            "assets": ["apps/studio/dxm/src/assets"]
+            "outputPath": "dist/apps/studio/dam",
+            "main": "apps/studio/dam/src/main.ts",
+            "tsConfig": "apps/studio/dam/tsconfig.app.json",
+            "assets": ["apps/studio/dam/src/assets"]
           },
           "configurations": {
             "production": {
@@ -386,8 +386,8 @@
               "inspect": false,
               "fileReplacements": [
                 {
-                  "replace": "apps/studio/dxm/src/environments/environment.ts",
-                  "with": "apps/studio/dxm/src/environments/environment.prod.ts"
+                  "replace": "apps/studio/dam/src/environments/environment.ts",
+                  "with": "apps/studio/dam/src/environments/environment.prod.ts"
                 }
               ]
             }
@@ -396,7 +396,7 @@
         "serve": {
           "builder": "@nrwl/node:execute",
           "options": {
-            "buildTarget": "studio-dxm:build"
+            "buildTarget": "studio-dam:build"
           }
         },
         "lint": {
@@ -404,17 +404,17 @@
           "options": {
             "linter": "eslint",
             "tsConfig": [
-              "apps/studio/dxm/tsconfig.app.json",
-              "apps/studio/dxm/tsconfig.spec.json"
+              "apps/studio/dam/tsconfig.app.json",
+              "apps/studio/dam/tsconfig.spec.json"
             ],
-            "exclude": ["**/node_modules/**", "!apps/studio/dxm/**/*"]
+            "exclude": ["**/node_modules/**", "!apps/studio/dam/**/*"]
           }
         },
         "test": {
           "builder": "@nrwl/jest:jest",
           "options": {
-            "jestConfig": "apps/studio/dxm/jest.config.js",
-            "tsConfig": "apps/studio/dxm/tsconfig.spec.json",
+            "jestConfig": "apps/studio/dam/jest.config.js",
+            "tsConfig": "apps/studio/dam/tsconfig.spec.json",
             "passWithNoTests": true
           }
         }
