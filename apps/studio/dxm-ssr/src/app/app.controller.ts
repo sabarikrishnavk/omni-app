@@ -9,19 +9,15 @@ import { AppService } from './app.service';
 export class AppController {
   constructor(private readonly appService: AppService) {}
 
-  @Get()
-  @Render('index.hbs')
-  root() {
-    return { message: 'Hello world!' ,widgets:{header: "header2"},components:{ menu: "menu1" }};
-  }
-
-  // @Get("site/:siteId")
-  // @Render('index.hbs')
-  // project(@Param('siteId') siteId:string, @Res() res:ServerResponse) { 
-  //   res.setHeader('site-id', siteId);
-  //   return { message: siteId,page:{header2: true}};
-  // }
-
+  @Get() 
+  root(@Req() req:Request) {
+    let siteId  = req.headers['site-id'];
+    console.log('Site Id: '+ siteId); 
+    if(siteId == null){
+      return ;
+    }
+    return "<a href='/shop'>shop<a>";
+  } 
 
   @Get(':pageContextId')
   @Render('index.hbs')
@@ -66,14 +62,11 @@ export class AppController {
     if(pageContextId =='products'){
       sitePageData.pageData=data.products[0];
     }
-
+    if(pageContextId =='cart'){
+      sitePageData.pageData=data.carts[0];
+    }
 
     return sitePageData;
-  }
-
-  @Get('site/1/1')
-  getSites(){
-    return this.appService.getSite();
-  }
+  } 
    
 }

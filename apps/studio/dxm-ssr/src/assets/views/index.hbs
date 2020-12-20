@@ -1,12 +1,8 @@
 <!DOCTYPE html>
 <html>
-<head>
-    {{#if page.meta1}}
-      {{> meta1}}
-    {{/if}}
-    {{#if page.meta2}}
-      {{> meta2 }}
-    {{/if}}
+<head> 
+      {{> meta1}} 
+      {{> header-links }} 
 </head>
 
 <body>   
@@ -36,6 +32,8 @@
     {{#equal widgets.footer "footer1"}}
       {{> footer1 }}
     {{/equal}} 
+
+    {{> footer-links }} 
 </body>
 
 </html>

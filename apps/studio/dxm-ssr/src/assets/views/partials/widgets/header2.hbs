@@ -4,6 +4,7 @@
     {{/equal}} 
 {{/contents}}
 
-{{#equal components.menu "menu2" }}
-   <p>{{> menu2 }}</p>
-{{/equal}}
+{{#contains components.menu}}  
+     <p>Component  --> {{components.menu}} </p> 
+     {{>( partial components.menu pageData=pageData )}} 
+{{/contains }} 
