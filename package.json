@@ -37,6 +37,7 @@
     "@nestjs/graphql": "^7.6.0",
     "@nestjs/jwt": "^7.2.0",
     "@nestjs/platform-express": "^7.0.0",
+    "@nestjs/serve-static": "^2.1.4",
     "@nestjs/typeorm": "^7.1.0",
     "apollo-boost": "^0.4.9",
     "apollo-client": "^2.6.10",

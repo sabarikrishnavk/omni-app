@@ -65,6 +65,7 @@ export class AppController {
     if(pageContextId =='cart'){
       sitePageData.pageData=data.carts[0];
     }
+    sitePageData.configData={"dam-url":"http://localhost:3000/dam/"};
 
     return sitePageData;
   } 
