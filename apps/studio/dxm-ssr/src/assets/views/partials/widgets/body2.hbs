@@ -1,13 +1,14 @@
 <!--Body 2 comes here--> 
-
-{{#contains components.row1column0.content}}   
-     {{#content pagecontents components.row1column0.content }} 
-          {{>( partial this.templates.filename content=this )}} 
-     {{/content}} 
-{{/contains }}  
-{{#contains components.row1column0.component}}  
-     {{>( partial components.row1column0.component pageData=pageData )}} 
-{{/contains }} 
+<div class="body2"> 
+     {{#contains components.row1column0.content}}   
+          {{#content pagecontents components.row1column0.content }} 
+               {{>( partial this.templates.filename content=this )}} 
+          {{/content}} 
+     {{/contains }}  
+     {{#contains components.row1column0.component}}  
+          {{>( partial components.row1column0.component pageData=pageData )}} 
+     {{/contains }}  
+</div>
 
 <div class="body2">
      <div class="container-fluid">
@@ -35,12 +36,13 @@
           </div>
      </div>
 </div>
-
-{{#contains components.row3column0.content}}   
-     {{#content pagecontents components.row3column0.content }} 
-          {{>( partial this.templates.filename content=this )}} 
-     {{/content}} 
-{{/contains }}  
-{{#contains components.row3column0.component}}  
-     {{>( partial components.row3column0.component pageData=pageData )}} 
-{{/contains }}  
+<div class="body2"> 
+     {{#contains components.row3column0.content}}   
+          {{#content pagecontents components.row3column0.content }} 
+               {{>( partial this.templates.filename content=this )}} 
+          {{/content}} 
+     {{/contains }}  
+     {{#contains components.row3column0.component}}  
+          {{>( partial components.row3column0.component pageData=pageData )}} 
+     {{/contains }}  ]
+</div>

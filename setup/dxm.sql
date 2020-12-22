@@ -11,7 +11,7 @@ CREATE TABLE widgettemplates (
 	templatename        TEXT    NOT NULL,  
   	filename	        TEXT    NOT NULL, 
     hbsreference	    TEXT    NOT NULL,
-    specs               JSONB   ,  
+    specs             JSONB   ,  
   	PRIMARY KEY (widgettemplatesid)
 );
 
@@ -224,14 +224,14 @@ INSERT INTO sitepages (sitepagesid,sitesid,pagetemplatesid,pagename,pageurl,"ver
 (gen_random_uuid(), (select sitesid from sites where sitename ='Galaxy'), (select pagetemplatesid from pagetemplates where filename='pdppage'),
 'Galaxy PDP Page','products/keyId',1,'Active','2020-12-01','2021-12-31',
 '{"header": "header1","footer":"footer1","body":"body2"}',
-'{"menu": "menu-horizontal","row1column0": {"content":"pdp-banner"},"row2column1": {"component":"product-details", "sub-components":[{"col1row0":"product-image","col2row1":"product-info","col2row2":"add-to-cart"}] } ,"row2column2": {"component":"cart-summary"}, "row3column0": {"component":"related-items"} }', 
+'{"menu": "menu-horizontal","row1column0": {"content":"pdp-banner"},"row2column1": {"component":"product-details", "sub-components":[{"col1row0":"product-image","col2row1":"product-info","col2row2":"add-to-cart"}] } ,"row2column2": {"component":"cart-summary"}, "row3column0": {"component":"related-products"} }', 
 '{"description": "PDP Page", "title":"Welcome to Galaxy.com"}' ) ;
 
 INSERT INTO sitepages (sitepagesid,sitesid,pagetemplatesid,pagename,pageurl,"version",status,startdate,enddate, widgets,components,metadata) VALUES 
 (gen_random_uuid(), (select sitesid from sites where sitename ='Galaxy'), (select pagetemplatesid from pagetemplates where filename='cartpage'),
 'Galaxy Cart Page','cart/keyId',1,'Active','2020-12-01','2021-12-31',
 '{"header": "header1","footer":"footer1","body":"body2"}',
-'{"menu": "menu-horizontal","row1column0": {"content":"cart-banner"},"row2column1": {"component":"cart-items"} ,"row2column2": {"component":"cart-summary"}, "row3column0": {"component":"related-items"} }', 
+'{"menu": "menu-horizontal","row1column0": {"content":"cart-banner"},"row2column1": {"component":"cart-items"} ,"row2column2": {"component":"cart-summary"}, "row3column0": {"component":"related-products"} }', 
 '{"description": "Cart Page", "title":"Welcome to Galaxy.com" }' ) ;
  
 
