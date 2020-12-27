@@ -1,3 +1,13 @@
+designer.widgets
+designer.pages 
+designer.components
+designer.contents 
+designer.sites 
+
+designer.sitepages
+designer.sitecontents
+designer.sitepagecontents
+
 
 
 
@@ -52,7 +62,7 @@ INSERT INTO pagetemplates (pagetemplatesid,templatename,filename,hbsreference,sp
 INSERT INTO pagetemplates (pagetemplatesid,templatename,filename,hbsreference,specs) VALUES 
 (gen_random_uuid(),'PDP Page','pdppage','{"widgets": ["header", "body", "footer"]}','{"schema": "query ProductPageQuery { products(where: {sku: {_eq: #keyId }}) { details productsid sku } }"}');
 INSERT INTO pagetemplates (pagetemplatesid,templatename,filename,hbsreference,specs) VALUES 
-(gen_random_uuid(),'Cart Page','cartpage','{"widgets": ["header","body","footer"]}','{"schema": "query CartPageQuery { carts(where: {cartsid: {_eq: #keyId }}) { details cartsid usersid } }"}');
+(gen_random_uuid(),'Cart Page','cartpage','{"widgets": ["header","body","footer"]}','{"schema": "query CartPageQuery { carts(where: {cartsid: {_eq: #keyId }}) { details items{ details status } cartsid usersid } }"}');
 INSERT INTO pagetemplates (pagetemplatesid,templatename,filename,hbsreference,specs) VALUES 
 (gen_random_uuid(),'Checkout Page','checkoutpage','{"widgets": ["header","body","footer"]}','""');
 INSERT INTO pagetemplates (pagetemplatesid,templatename,filename,hbsreference,specs) VALUES 
@@ -84,6 +94,8 @@ INSERT INTO contenttemplates (contenttemplatesid,templatename,filename,hbsrefere
 (gen_random_uuid(),'Modal ','modal','modal','""');
 INSERT INTO contenttemplates (contenttemplatesid,templatename,filename,hbsreference,specs) VALUES 
 (gen_random_uuid(),'JSON ','json','json','""');
+INSERT INTO contenttemplates (contenttemplatesid,templatename,filename,hbsreference,specs) VALUES 
+(gen_random_uuid(),'javascript ','javascript','javascript','""');
 
 -- drop table componenttemplates;
 CREATE TABLE componenttemplates (
@@ -229,7 +241,7 @@ INSERT INTO sitepages (sitepagesid,sitesid,pagetemplatesid,pagename,pageurl,"ver
 
 INSERT INTO sitepages (sitepagesid,sitesid,pagetemplatesid,pagename,pageurl,"version",status,startdate,enddate, widgets,components,metadata) VALUES 
 (gen_random_uuid(), (select sitesid from sites where sitename ='Galaxy'), (select pagetemplatesid from pagetemplates where filename='cartpage'),
-'Galaxy Cart Page','cart/keyId',1,'Active','2020-12-01','2021-12-31',
+'Galaxy Cart Page','cart',1,'Active','2020-12-01','2021-12-31',
 '{"header": "header1","footer":"footer1","body":"body2"}',
 '{"menu": "menu-horizontal","row1column0": {"content":"cart-banner"},"row2column1": {"component":"cart-items"} ,"row2column2": {"component":"cart-summary"}, "row3column0": {"component":"related-products"} }', 
 '{"description": "Cart Page", "title":"Welcome to Galaxy.com" }' ) ;

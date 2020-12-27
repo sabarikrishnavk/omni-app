@@ -5,7 +5,8 @@ import { join } from 'path';
 import * as hbs from 'hbs';
 import * as path from 'path';
 import * as fs from 'fs';
-
+import * as cookieParser from 'cookie-parser';
+// somewhere in your initialization file
 import { AppModule } from './app/app.module';
 
 async function bootstrap() {
@@ -88,6 +89,7 @@ async function bootstrap() {
     }
   });
   
+  app.use(cookieParser());
   const port = process.env.PORT || 3333;
   await app.listen(port, () => {
     Logger.log('Listening at http://localhost:' + port);

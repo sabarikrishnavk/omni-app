@@ -15,26 +15,26 @@
                     </tr>
                 </thead>
                 <tbody class="align-middle">
-                    {{#pageData.details.items as |item| }}
+                    {{#pageData.items as |item| }}
                     <tr>
                         <td>
                             <div class="img">
                                 <a href="#"><img src="{{../configData.dam-url}}/img/product-1.jpg" alt="Image"></a>
-                                <p>{{item.sku}} -{{configData.dam-url}}</p>
+                                <p>{{item.details.sku}} -{{configData.dam-url}}</p>
                             </div>
                         </td>
-                        <td>${{item.price}}</td>
+                        <td>${{item.details.price}} <{{item.status}}</td>
                         <td>
                             <div class="qty">
                                 <button class="btn-minus"><i class="fa fa-minus"></i></button>
-                                <input type="text" value="{{item.qty}}">
+                                <input type="text" value="{{item.details.qty}}">
                                 <button class="btn-plus"><i class="fa fa-plus"></i></button>
                             </div>
                         </td>
-                        <td>${{item.total}}</td>
+                        <td>${{item.details.total}}</td>
                         <td><button><i class="fa fa-trash"></i></button></td>
                     </tr>  
-                    {{/pageData.details.items}}
+                    {{/pageData.items}}
                 </tbody>
             </table>
         </div>

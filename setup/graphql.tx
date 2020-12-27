@@ -1,0 +1,26 @@
+ 
+
+
+query CartPageQuery {
+  carts {
+    details
+    items {
+      details
+      status
+    }
+    cartsid
+    usersid
+  }
+}
+
+mutation CreateCart($carts_insert_input: carts_insert_input!) {
+    insert_carts_one(object: $carts_insert_input) {
+        cartsid
+    }
+}
+{
+  "carts_insert_input":
+  {"usersid":"2f512af8-3882-46b8-bd65-283e1c6cc2b8",
+    "status":"Pending" 
+    ,"lastupdateby":"2f512af8-3882-46b8-bd65-283e1c6cc2b8"}
+} 

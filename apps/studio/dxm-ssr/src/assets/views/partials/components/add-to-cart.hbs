@@ -3,7 +3,7 @@
     <h4>Quantity:</h4>
     <div class="qty">
         <button class="btn-minus"><i class="fa fa-minus"></i></button>
-        <input type="text" value="1">
+        <input type="text" value="1" id="textQuantity">
         <button class="btn-plus"><i class="fa fa-plus"></i></button>
     </div>
 </div>
@@ -25,6 +25,107 @@
     </div> 
 </div>
 <div class="action">
-    <a class="btn" href="#"><i class="fa fa-shopping-cart"></i>Add to Cart</a>
+    <a class="btn" href="#" id="btnAdd2Cart"><i class="fa fa-shopping-cart"></i>Add to Cart</a>
     <a class="btn" href="#"><i class="fa fa-shopping-bag"></i>Buy Now</a>
 </div>
+<script>
+    function readCookie(name) {
+        var nameEQ = name + "=";
+        var ca = document.cookie.split(';');
+        for(var i=0;i < ca.length;i++) {
+            var c = ca[i];
+            while (c.charAt(0)==' ') c = c.substring(1,c.length);
+            if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length,c.length);
+        }
+        return null;
+    }
+    $(document).ready(function() {
+
+        $("#btnAdd2Cart").click(function() {
+
+            const qty = $("#textQuantity").val();
+            $("#btnAdd2Cart").html('adding....');
+
+            var cartsid = readCookie('cartsid');
+            console.log('cartsid : ' + cartsid);
+ 
+            if(cartsid ==null){
+
+                const createCartDoc = `
+                    mutation CreateCart($carts_insert_input: carts_insert_input!) {
+                        insert_carts_one(object: $carts_insert_input) {
+                            cartsid
+                        }
+                    }
+                    `;
+                const createCartInput = {
+                    "carts_insert_input": { 
+                        "usersid": "2f512af8-3882-46b8-bd65-283e1c6cc2b8", 
+                        "status": "Pending",  
+                        "lastupdateby": "2f512af8-3882-46b8-bd65-283e1c6cc2b8"
+                    }
+                };
+                var inputData = JSON.stringify({
+                    query: createCartDoc,
+                    variables: createCartInput,
+                    operationName: 'CreateCart'
+                });
+
+                console.log('Inputdata: '+ inputData);
+                $.ajax({url: "http://localhost:8080/v1/graphql", 
+                    headers: { 
+                        'x-hasura-admin-secret':'SECRET_KEY',
+                        'Content-Type':'application/json'
+                    },
+                    type:'POST',
+                    data: inputData,
+                    success: function(result) {
+                        $("#btnAdd2Cart").html('<i class="fa fa-shopping-cart"></i>Add to Cart');
+                        cartsid=result.data.insert_carts_one.cartsid; 
+                        document.cookie="cartsid="+result.data.insert_carts_one.cartsid+";path=/";
+                    }
+                });
+
+            }
+            if(cartsid !=null){
+                const createCartItemDoc= `
+                    mutation CreateCartItem($cartitems_insert_input: cartitems_insert_input!) {
+                        insert_cartitems_one(object: $cartitems_insert_input) { 
+                            cartsid
+                            cartitemsid
+                        }
+                    } 
+                `;
+                const createCartItemInput={ 
+                    "cartitems_insert_input": { 
+                        "cartsid": cartsid,
+                        "details": {"qty":qty,"sku":"{{pageData.sku}}","price":{{pageData.details.price}},"total":99},  
+                        "status": "Pending",  
+                        "lastupdateby": "2f512af8-3882-46b8-bd65-283e1c6cc2b8"
+                    } 
+                }; 
+
+           
+                var inputData = JSON.stringify({
+                    query: createCartItemDoc,
+                    variables: createCartItemInput,
+                    operationName: 'CreateCartItem'
+                }); 
+
+                console.log('Inputdata: '+ inputData);
+                $.ajax({url: "http://localhost:8080/v1/graphql", 
+                    headers: { 
+                        'x-hasura-admin-secret':'SECRET_KEY',
+                        'Content-Type':'application/json'
+                    },
+                    type:'POST',
+                    data: inputData,
+                    success: function(result) {
+                        $("#btnAdd2Cart").html('<i class="fa fa-shopping-cart"></i>Add to Cart');
+                    }
+                });
+
+            }
+        }); 
+    });
+</script>

@@ -33,9 +33,26 @@ export class AppController {
 
 
     let sitePagesData = await this.appService.getPage(siteId.toString(),pageContextId);
-
+ 
     console.log('site page details'+JSON.stringify(sitePagesData));
-    let sitePageData = sitePagesData.sitepages[0];
+    let sitePageData = sitePagesData.sitepages[0];   
+
+    let cartsid = req.cookies['cartsid'];// "5068186e-1246-4b62-acb1-59f6f1739447";
+    console.log('cookies :'+JSON.stringify(req.cookies));
+
+    console.log('cartsid '+ cartsid);
+    if(pageContextId =='cart'){
+
+      if(cartsid == null){
+        cartsid ='';
+      }
+      let query= sitePagesData.sitepages[0].templates.specs.schema.replace('#keyId','"'+cartsid+'"');  
+      let data =await this.appService.getData(query);
+      console.log('Key data : '+ JSON.stringify(data)); 
+      sitePageData.pageData=data.carts[0]; 
+    }
+    //console.log('query to fire : '+ query); 
+
     sitePageData.configData={"dam-url":this.DAM_URL};
 
     return sitePageData;
