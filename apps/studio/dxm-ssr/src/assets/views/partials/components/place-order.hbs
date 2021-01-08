@@ -1,0 +1,72 @@
+
+<div class="checkout">
+    <a class="btn" href="#" id="btnPlaceOrder"><i class="fa "></i>Place Order</a> 
+</div>
+
+
+<script>
+    function readCookie(name) {
+        var nameEQ = name + "=";
+        var ca = document.cookie.split(';');
+        for(var i=0;i < ca.length;i++) {
+            var c = ca[i];
+            while (c.charAt(0)==' ') c = c.substring(1,c.length);
+            if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length,c.length);
+        }
+        return null;
+    }
+    function addItem(cartsid, qty){ 
+
+        const updateCartDoc = `
+            mutation UpdateCart($carts_set_input: carts_set_input, $cartsid: uuid) {
+                update_carts(where: {cartsid: {_eq: $cartsid}}, 
+                    _set:$carts_set_input) {
+                    returning {
+                        cartsid
+                    }
+                }
+            }
+            `;
+        const updateCartInput = {
+            "cartsid":cartsid,
+            "carts_set_input":
+            {
+                "usersid":"2f512af8-3882-46b8-bd65-283e1c6cc2b8",
+                "status":"Placed" ,
+                "lastupdateby":"2f512af8-3882-46b8-bd65-283e1c6cc2b8"
+            }
+        } ;
+        var inputData = JSON.stringify({
+            query: updateCartDoc,
+            variables: updateCartInput,
+            operationName: 'UpdateCart'
+        });
+
+
+        console.log('Inputdata: '+ inputData);
+        $.ajax({url: "http://localhost:8080/v1/graphql", 
+            headers: { 
+                'x-hasura-admin-secret':'SECRET_KEY',
+                'Content-Type':'application/json'
+            },
+            type:'POST',
+            data: inputData,
+            success: function(result) {
+                $("#btnPlaceOrder").html('<i class="fa"></i>Place Order');
+            }
+        });
+    }
+    $(document).ready(function() {
+
+        $("#btnPlaceOrder").click(function() {
+
+            $("#btnPlaceOrder").html('Placing....');
+
+            const qty = $("#textQuantity").val();
+
+            var cartsid = readCookie('cartsid');
+            console.log('cartsid : ' + cartsid);
+   
+        }); 
+    });
+</script>

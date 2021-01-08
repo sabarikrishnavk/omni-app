@@ -1,0 +1,190 @@
+
+<div class= "checkout">
+    <div class="checkout-inner">
+        <div class="billing-address">
+            <h2>Billing Address</h2>
+            <div id="billing-address-summary"></div>
+            <form id="billing-address-form" action="" method="post">
+                <div class="row">
+                    <div class="col-md-6">
+                        <label for="firstname">First Name</label>
+                        <input class="form-control" type="text" name="firstname" placeholder="First Name" >
+                    </div>
+                    <div class="col-md-6">
+                        <label for="lastname">Last Name</label>
+                        <input class="form-control" type="text" name="lastname" placeholder="Last Name" >
+                    </div>
+                    <div class="col-md-6">
+                        <label for="email">E-mail</label>
+                        <input class="form-control" type="text" name="email" placeholder="E-mail">
+                    </div>
+                    <div class="col-md-6">
+                        <label>Mobile No</label>
+                        <input class="form-control" type="text" placeholder="Mobile No">
+                    </div>
+                    <div class="col-md-12">
+                        <label>Address</label>
+                        <input class="form-control" type="text" placeholder="Address">
+                    </div>
+                    <div class="col-md-6">
+                        <label>Country</label>
+                        <select class="custom-select">
+                            <option selected>United States</option>
+                            <option>Afghanistan</option>
+                            <option>Albania</option>
+                            <option>Algeria</option>
+                        </select>
+                    </div>
+                    <div class="col-md-6">
+                        <label>City</label>
+                        <input class="form-control" type="text" placeholder="City">
+                    </div>
+                    <div class="col-md-6">
+                        <label>State</label>
+                        <input class="form-control" type="text" placeholder="State">
+                    </div>
+                    <div class="col-md-6">
+                        <label>ZIP Code</label>
+                        <input class="form-control" type="text" placeholder="ZIP Code">
+                    </div>
+                    <div class="col-md-12">
+                        <div class="custom-control custom-checkbox">
+                            <input type="checkbox" class="custom-control-input" id="newaccount">
+                            <label class="custom-control-label" for="newaccount">Create an account</label>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="custom-control custom-checkbox">
+                            <input type="checkbox" class="custom-control-input" id="shipto">
+                            <label class="custom-control-label" for="shipto">Ship to different address</label>
+                        </div>
+                    </div>
+                </div>
+                <input class="submit" type="submit" value="SUBMIT">
+            </form>
+        </div>
+
+        <div class="shipping-address">
+            <h2>Shipping Address</h2>
+            <div class="row">
+                <div class="col-md-6">
+                    <label>First Name</label>
+                    <input class="form-control" type="text" placeholder="First Name" value="">
+                </div>
+                <div class="col-md-6">
+                    <label>Last Name"</label>
+                    <input class="form-control" type="text" placeholder="Last Name">
+                </div>
+                <div class="col-md-6">
+                    <label>E-mail</label>
+                    <input class="form-control" type="text" placeholder="E-mail">
+                </div>
+                <div class="col-md-6">
+                    <label>Mobile No</label>
+                    <input class="form-control" type="text" placeholder="Mobile No">
+                </div>
+                <div class="col-md-12">
+                    <label>Address</label>
+                    <input class="form-control" type="text" placeholder="Address">
+                </div>
+                <div class="col-md-6">
+                    <label>Country</label>
+                    <select class="custom-select">
+                        <option selected>United States</option>
+                        <option>Afghanistan</option>
+                        <option>Albania</option>
+                        <option>Algeria</option>
+                    </select>
+                </div>
+                <div class="col-md-6">
+                    <label>City</label>
+                    <input class="form-control" type="text" placeholder="City">
+                </div>
+                <div class="col-md-6">
+                    <label>State</label>
+                    <input class="form-control" type="text" placeholder="State">
+                </div>
+                <div class="col-md-6">
+                    <label>ZIP Code</label>
+                    <input class="form-control" type="text" placeholder="ZIP Code">
+                </div>
+            </div>
+        </div>
+    </div> 
+</div>
+
+
+<script>
+// Wait for the DOM to be ready
+$(document).ready(function() {
+  // Initialize form validation on the registration form.
+  // It has the name attribute "registration"
+  $("#billing-address-form").validate({
+        errorClass: "error fail-alert",
+        validClass: "valid success-alert",
+        showErrors: function(errorMap, errorList) {
+            $("#billing-address-summary").html("Your form contains " + this.numberOfInvalids() + 
+            " errors, see details below."+ JSON.stringify(errorMap));
+            //this.defaultShowErrors();
+        },
+    // Specify validation rules
+        rules: {
+            // The key name on the left side is the name attribute
+            // of an input field. Validation rules are defined
+            // on the right side
+            firstname: {
+                minlength: 3,
+                required: true
+            },
+            lastname: {
+                minlength: 3,
+                required: true
+            },
+            email: {
+                required: true,
+                // Specify that email should be validated
+                // by the built-in "email" rule
+                email: true
+            },
+            password: {
+                required: true,
+                minlength: 5
+            }
+        },
+        // Specify validation error messages
+        messages: {
+            firstname: "Please enter First Name",
+            lastname: "Please enter Last Name",
+            password: {
+                required: "Please provide a password",
+                minlength: "Your password must be at least 5 characters long"
+            },
+            email: "Please enter a valid email address"
+        },
+            // Make sure the form is submitted to the destination defined
+            // in the "action" attribute of the form when valid
+        submitHandler: function(form) {
+            form.submit();
+        }
+    }); 
+        // Shipping address show hide
+    $('.checkout #shipto').change(function () {
+        if($(this).is(':checked')) {
+            $('.checkout .shipping-address').slideDown();
+        } else {
+            $('.checkout .shipping-address').slideUp();
+        }
+    });
+    
+    
+    // Payment methods show hide
+    $('.checkout .payment-method .custom-control-input').change(function () {
+        if ($(this).prop('checked')) {
+            var checkbox_id = $(this).attr('id');
+            $('.checkout .payment-method .payment-content').slideUp();
+            $('#' + checkbox_id + '-show').slideDown();
+        }
+    }); 
+});
+
+</script>

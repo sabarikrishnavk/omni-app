@@ -37,11 +37,18 @@ export class AppController {
     console.log('site page details'+JSON.stringify(sitePagesData));
     let sitePageData = sitePagesData.sitepages[0];   
 
+    if(sitePageData == null){
+      console.log('context not defined : '+ pageContextId);
+      pageContextId= '404';
+      sitePagesData = await this.appService.getPage(siteId.toString(),pageContextId);
+      sitePageData = sitePagesData.sitepages[0]; 
+    }
+
     let cartsid = req.cookies['cartsid'];// "5068186e-1246-4b62-acb1-59f6f1739447";
     console.log('cookies :'+JSON.stringify(req.cookies));
 
     console.log('cartsid '+ cartsid);
-    if(pageContextId =='cart'){
+    if(pageContextId =='cart' || pageContextId =='checkout' ){
 
       if(cartsid == null){
         cartsid ='';
@@ -52,7 +59,7 @@ export class AppController {
       sitePageData.pageData=data.carts[0]; 
     }
     //console.log('query to fire : '+ query); 
-
+ 
     sitePageData.configData={"dam-url":this.DAM_URL};
 
     return sitePageData;
@@ -81,10 +88,7 @@ export class AppController {
     let sitePageData = sitePagesData.sitepages[0];
     if(pageContextId =='products'){
       sitePageData.pageData=data.products[0];
-    }
-    if(pageContextId =='cart'){
-      sitePageData.pageData=data.carts[0];
-    }
+    } 
     sitePageData.configData={"dam-url":this.DAM_URL};
 
     return sitePageData;

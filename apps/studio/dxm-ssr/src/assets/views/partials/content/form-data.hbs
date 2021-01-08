@@ -1,0 +1,8 @@
+<div class="row">
+    {{#form-data.fields as | field |}}
+    <div class="col-md-6">
+        <label>{{field.name}} </label>
+        <input class="form-control" type="text" placeholder="{{field.name}}" id="{{field.id}}">
+    </div>
+    {{/form-data.fields }} 
+</div>

@@ -28,6 +28,7 @@
     <a class="btn" href="#" id="btnAdd2Cart"><i class="fa fa-shopping-cart"></i>Add to Cart</a>
     <a class="btn" href="#"><i class="fa fa-shopping-bag"></i>Buy Now</a>
 </div>
+
 <script>
     function readCookie(name) {
         var nameEQ = name + "=";
@@ -38,6 +39,45 @@
             if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length,c.length);
         }
         return null;
+    }
+    function addItem(cartsid, qty){
+
+        const createCartItemDoc= `
+            mutation CreateCartItem($cartitems_insert_input: cartitems_insert_input!) {
+                insert_cartitems_one(object: $cartitems_insert_input) { 
+                    cartsid
+                    cartitemsid
+                }
+            } 
+        `;
+        const createCartItemInput={ 
+            "cartitems_insert_input": { 
+                "cartsid": cartsid,
+                "details": {"qty":qty,"sku":"{{pageData.sku}}","price":{{pageData.details.price}},"total":{{pageData.details.price}} },  
+                "status": "Pending",  
+                "lastupdateby": "2f512af8-3882-46b8-bd65-283e1c6cc2b8"
+            } 
+        }; 
+
+    
+        var inputData = JSON.stringify({
+            query: createCartItemDoc,
+            variables: createCartItemInput,
+            operationName: 'CreateCartItem'
+        }); 
+
+        console.log('Inputdata: '+ inputData);
+        $.ajax({url: "http://localhost:8080/v1/graphql", 
+            headers: { 
+                'x-hasura-admin-secret':'SECRET_KEY',
+                'Content-Type':'application/json'
+            },
+            type:'POST',
+            data: inputData,
+            success: function(result) {
+                $("#btnAdd2Cart").html('<i class="fa fa-shopping-cart"></i>Add to Cart');
+            }
+        });
     }
     $(document).ready(function() {
 
@@ -83,49 +123,13 @@
                         $("#btnAdd2Cart").html('<i class="fa fa-shopping-cart"></i>Add to Cart');
                         cartsid=result.data.insert_carts_one.cartsid; 
                         document.cookie="cartsid="+result.data.insert_carts_one.cartsid+";path=/";
+                        addItem(cartsid,qty);
                     }
                 });
 
-            }
-            if(cartsid !=null){
-                const createCartItemDoc= `
-                    mutation CreateCartItem($cartitems_insert_input: cartitems_insert_input!) {
-                        insert_cartitems_one(object: $cartitems_insert_input) { 
-                            cartsid
-                            cartitemsid
-                        }
-                    } 
-                `;
-                const createCartItemInput={ 
-                    "cartitems_insert_input": { 
-                        "cartsid": cartsid,
-                        "details": {"qty":qty,"sku":"{{pageData.sku}}","price":{{pageData.details.price}},"total":99},  
-                        "status": "Pending",  
-                        "lastupdateby": "2f512af8-3882-46b8-bd65-283e1c6cc2b8"
-                    } 
-                }; 
-
-           
-                var inputData = JSON.stringify({
-                    query: createCartItemDoc,
-                    variables: createCartItemInput,
-                    operationName: 'CreateCartItem'
-                }); 
-
-                console.log('Inputdata: '+ inputData);
-                $.ajax({url: "http://localhost:8080/v1/graphql", 
-                    headers: { 
-                        'x-hasura-admin-secret':'SECRET_KEY',
-                        'Content-Type':'application/json'
-                    },
-                    type:'POST',
-                    data: inputData,
-                    success: function(result) {
-                        $("#btnAdd2Cart").html('<i class="fa fa-shopping-cart"></i>Add to Cart');
-                    }
-                });
-
-            }
+            }else{
+                addItem(cartsid,qty);
+            } 
         }); 
     });
 </script>

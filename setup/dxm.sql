@@ -64,7 +64,7 @@ INSERT INTO pagetemplates (pagetemplatesid,templatename,filename,hbsreference,sp
 INSERT INTO pagetemplates (pagetemplatesid,templatename,filename,hbsreference,specs) VALUES 
 (gen_random_uuid(),'Cart Page','cartpage','{"widgets": ["header","body","footer"]}','{"schema": "query CartPageQuery { carts(where: {cartsid: {_eq: #keyId }}) { details items{ details status } cartsid usersid } }"}');
 INSERT INTO pagetemplates (pagetemplatesid,templatename,filename,hbsreference,specs) VALUES 
-(gen_random_uuid(),'Checkout Page','checkoutpage','{"widgets": ["header","body","footer"]}','""');
+(gen_random_uuid(),'Checkout Page','checkoutpage','{"widgets": ["header","body","footer"]}','{"schema": "query CartPageQuery { carts(where: {cartsid: {_eq: #keyId }}) { details addresses payments items{ details status } cartsid usersid } }"}');
 INSERT INTO pagetemplates (pagetemplatesid,templatename,filename,hbsreference,specs) VALUES 
 (gen_random_uuid(),'Order Page','orderpage','{"widgets": ["header","body","footer"]}','""');
 
@@ -246,6 +246,19 @@ INSERT INTO sitepages (sitepagesid,sitesid,pagetemplatesid,pagename,pageurl,"ver
 '{"menu": "menu-horizontal","row1column0": {"content":"cart-banner"},"row2column1": {"component":"cart-items"} ,"row2column2": {"component":"cart-summary"}, "row3column0": {"component":"related-products"} }', 
 '{"description": "Cart Page", "title":"Welcome to Galaxy.com" }' ) ;
  
+ INSERT INTO sitepages (sitepagesid,sitesid,pagetemplatesid,pagename,pageurl,"version",status,startdate,enddate, widgets,components,metadata) VALUES 
+(gen_random_uuid(), (select sitesid from sites where sitename ='Galaxy'), (select pagetemplatesid from pagetemplates where filename='staticpage'),
+'Galaxy Page not found','404',1,'Active','2020-12-01','2021-12-31',
+'{"header": "header1","footer":"footer1","body":"body0"}',
+'{"menu": "menu-horizontal","row1column0": {"content":"page-not-found-message"} }', 
+'{"description": "Galaxy Page not found Page", "title":"Welcome to Galaxy.com" }' ) ;
+
+ INSERT INTO sitepages (sitepagesid,sitesid,pagetemplatesid,pagename,pageurl,"version",status,startdate,enddate, widgets,components,metadata) VALUES 
+(gen_random_uuid(), (select sitesid from sites where sitename ='Galaxy'), (select pagetemplatesid from pagetemplates where filename='checkoutpage'),
+'Galaxy Checkout Page','checkout',1,'Active','2020-12-01','2021-12-31',
+'{"header": "header2","footer":"footer1","body":"body2"}',
+'{"menu": "menu-horizontal","row1column0": {"content":"checkout-banner"},"row2column1": {"component":"checkout-address"} ,"row2column2": {"component":"cart-summary"}, "row3column0": {"component":"checkout-payment"} }', 
+'{"description": "Galaxy Checkout Page", "title":"Welcome to Galaxy.com" }' ) ;
 
 --drop table sitepagecontents;
 CREATE TABLE sitepagecontents (
@@ -284,6 +297,16 @@ INSERT INTO sitepagecontents(sitepagecontentsid, sitepagesid,sitecontents) VALUE
 (gen_random_uuid() ,
 (select sitepagesid from sitepages s where pagename ='Galaxy Home Page') ,  
 (select sitecontentsid from sitecontents s where pagecontentname='home-page-row3')
+);
+INSERT INTO sitepagecontents(sitepagecontentsid, sitepagesid,sitecontents) VALUES
+(gen_random_uuid() ,
+(select sitepagesid from sitepages s where pagename ='Galaxy Page not found') ,  
+(select sitecontentsid from sitecontents s where pagecontentname='header-banner')
+);
+INSERT INTO sitepagecontents(sitepagecontentsid, sitepagesid,sitecontents) VALUES
+(gen_random_uuid() ,
+(select sitepagesid from sitepages s where pagename ='Galaxy Checkout Page') ,  
+(select sitecontentsid from sitecontents s where pagecontentname='header-banner')
 );
 
 

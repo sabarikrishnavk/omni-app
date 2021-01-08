@@ -1730,8 +1730,7 @@ h2 {
     padding: 30px;
     background: #ffffff;
 }
-
-.checkout .billing-address,
+.billing-address,
 .checkout .shipping-address {
     position: relative;
     width: 100%;
@@ -2393,4 +2392,16 @@ h2 {
     .footer-bottom .template-by {
         text-align: center; 
     } 
+}
+
+label.error.fail-alert {
+    border: 2px solid red;
+    border-radius: 4px;
+    line-height: 1;
+    padding: 2px 0 6px 6px;
+    background: #ffe6eb;
+}
+input.valid.success-alert {
+    border: 2px solid #4CAF50;
+    color: green;
 }

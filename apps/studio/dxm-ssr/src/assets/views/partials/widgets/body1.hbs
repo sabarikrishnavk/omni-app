@@ -1,4 +1,40 @@
 <!--Body 1 comes here--> 
-<p>row1column0</p>
-<p>row2column1</p>
-<p>row2column2</p>
+<div class="body1"> 
+     <div class="container-fluid"> 
+            {{#contains components.row1column0.content}}   
+                {{#content pagecontents components.row1column0.content }} 
+                    {{>( partial this.templates.filename content=this )}} 
+                {{/content}} 
+            {{/contains }}  
+            {{#contains components.row1column0.component}}  
+                {{>( partial components.row1column0.component pageData=pageData )}} 
+            {{/contains }}   
+     </div>
+</div>
+
+<div class="body1">
+     <div class="container-fluid">
+          <div class="row"> 
+                {{#contains components.row2column1.content}}   
+                        {{#content pagecontents components.row2column1.content }} 
+                            {{>( partial this.templates.filename content=this )}} 
+                        {{/content}} 
+                {{/contains }}  
+                {{#contains components.row2column1.component}}  
+                        {{>( partial components.row2column1.component pageData=pageData )}} 
+                {{/contains }}  
+          </div>
+     </div>
+</div>
+<div class="body1"> 
+     <div class="container-fluid">  
+        {{#contains components.row3column0.content}}   
+            {{#content pagecontents components.row3column0.content }} 
+                {{>( partial this.templates.filename content=this )}} 
+            {{/content}} 
+        {{/contains }}  
+        {{#contains components.row3column0.component}}  
+            {{>( partial components.row3column0.component pageData=pageData )}} 
+        {{/contains }}  ]
+    </div>
+</div>
