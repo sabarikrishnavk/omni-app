@@ -20,15 +20,15 @@
                     </div>
                     <div class="col-md-6">
                         <label>Mobile No</label>
-                        <input class="form-control" type="text" placeholder="Mobile No">
+                        <input class="form-control" type="text" name="mobilenumber" placeholder="Mobile No">
                     </div>
                     <div class="col-md-12">
                         <label>Address</label>
-                        <input class="form-control" type="text" placeholder="Address">
+                        <input class="form-control" type="text" name="address" placeholder="Address">
                     </div>
                     <div class="col-md-6">
                         <label>Country</label>
-                        <select class="custom-select">
+                        <select class="custom-select" name="country">
                             <option selected>United States</option>
                             <option>Afghanistan</option>
                             <option>Albania</option>
@@ -37,15 +37,15 @@
                     </div>
                     <div class="col-md-6">
                         <label>City</label>
-                        <input class="form-control" type="text" placeholder="City">
+                        <input class="form-control" type="text" name="city" placeholder="City">
                     </div>
                     <div class="col-md-6">
                         <label>State</label>
-                        <input class="form-control" type="text" placeholder="State">
+                        <input class="form-control" type="text" name="state" placeholder="State">
                     </div>
                     <div class="col-md-6">
                         <label>ZIP Code</label>
-                        <input class="form-control" type="text" placeholder="ZIP Code">
+                        <input class="form-control" type="text" name="zipcode" placeholder="ZIP Code">
                     </div>
                     <div class="col-md-12">
                         <div class="custom-control custom-checkbox">
@@ -60,7 +60,9 @@
                         </div>
                     </div>
                 </div>
-                <input class="submit" type="submit" value="SUBMIT">
+                <div class="checkout">
+                    <a class="btn" href="#" id="btnAddOrderAddress"><i class="fa "></i>Continue</a> 
+                </div>
             </form>
         </div>
 
@@ -119,7 +121,7 @@
 $(document).ready(function() {
   // Initialize form validation on the registration form.
   // It has the name attribute "registration"
-  $("#billing-address-form").validate({
+    $("#billing-address-form").validate({
         errorClass: "error fail-alert",
         validClass: "valid success-alert",
         showErrors: function(errorMap, errorList) {
@@ -163,27 +165,38 @@ $(document).ready(function() {
         },
             // Make sure the form is submitted to the destination defined
             // in the "action" attribute of the form when valid
-        submitHandler: function(form) {
-            form.submit();
-        }
+       
     }); 
-        // Shipping address show hide
-    $('.checkout #shipto').change(function () {
-        if($(this).is(':checked')) {
-            $('.checkout .shipping-address').slideDown();
-        } else {
-            $('.checkout .shipping-address').slideUp();
-        }
+    $("#btnAddOrderAddress").click(function(form) { 
+        
+        var frm = $("#billing-address-form"); 
+        var addrdata = frm.serializeArray(); 
+
+        var billaddress = {};
+
+        $.each(addrdata, function() {
+            if (billaddress[this.name] !== undefined) {
+                if (!billaddress[this.name].push) {
+                    billaddress[this.name] = [billaddress[this.name]];
+                }
+                billaddress[this.name].push(this.value || '');
+            } else {
+                billaddress[this.name] = this.value || '';
+            }
+        });
+        console.log('submit Handler --'+ JSON.stringify(billaddress));
+        var cartsid = readCookie('cartsid');
+        console.log('cartsid : ' + cartsid);
+        addAddress(cartsid,billaddress);
+        //form.submit();
     });
-    
-    
-    // Payment methods show hide
-    $('.checkout .payment-method .custom-control-input').change(function () {
-        if ($(this).prop('checked')) {
-            var checkbox_id = $(this).attr('id');
-            $('.checkout .payment-method .payment-content').slideUp();
-            $('#' + checkbox_id + '-show').slideDown();
-        }
+    // Shipping address show hide
+    $('.checkout #shipto').change(function () {
+    if($(this).is(':checked')) {
+        $('.checkout .shipping-address').slideDown();
+    } else {
+        $('.checkout .shipping-address').slideUp();
+    }
     }); 
 });
 

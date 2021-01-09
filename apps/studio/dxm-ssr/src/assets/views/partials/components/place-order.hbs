@@ -15,7 +15,7 @@
         }
         return null;
     }
-    function addItem(cartsid, qty){ 
+    function addAddress(cartsid,address){ 
 
         const updateCartDoc = `
             mutation UpdateCart($carts_set_input: carts_set_input, $cartsid: uuid) {
@@ -33,6 +33,7 @@
             {
                 "usersid":"2f512af8-3882-46b8-bd65-283e1c6cc2b8",
                 "status":"Placed" ,
+                "addresses":address,
                 "lastupdateby":"2f512af8-3882-46b8-bd65-283e1c6cc2b8"
             }
         } ;
