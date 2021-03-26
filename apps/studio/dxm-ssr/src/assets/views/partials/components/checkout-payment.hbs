@@ -6,25 +6,58 @@
                 <h1>Payment Methods</h1>
                 <div class="payment-method">
                     <div class="custom-control custom-radio">
-                        <input type="radio" class="custom-control-input" id="payment-1" name="payment">
-                        <label class="custom-control-label" for="payment-1">Paypal</label>
+                        <input type="radio" class="custom-control-input" id="credit-card" name="payment">
+                        <label class="custom-control-label" for="credit-card">Credit Card</label>
                     </div>
-                    <div class="payment-content" id="payment-1-show">
-                        <p>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras tincidunt orci ac eros volutpat maximus lacinia quis diam.
-                        </p>
+                    <div class="payment-content" id="credit-card-show">
+                        <form id="credit-card-form" action="" method="">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <label for="ccnumber">Card Number</label>
+                                    <input class="form-control" type="text" name="ccnumber" placeholder="Card Number" >
+                                </div>
+                                <div class="col-md-3">
+                                    <label for="ccexpmonth">Exp Month</label>
+                                    <input class="form-control" type="text" name="ccexpmonth" placeholder="Exp Month" >
+                                </div>
+                                <div class="col-md-3">
+                                    <label for="ccexpyear">Exp Year</label>
+                                    <input class="form-control" type="text" name="ccexpyear" placeholder="Exp Year" >
+                                </div>
+                                <div class="col-md-3">
+                                    <label for="ccpin">Card Number</label>
+                                    <input class="form-control" type="text" name="ccpin" placeholder="CVV" >
+                                </div>
+                            </div>
+                        </form>
                     </div>
                 </div>
                 <div class="payment-method">
                     <div class="custom-control custom-radio">
-                        <input type="radio" class="custom-control-input" id="payment-2" name="payment">
-                        <label class="custom-control-label" for="payment-2">Payoneer</label>
+                        <input type="radio" class="custom-control-input" id="gift-card" name="payment">
+                        <label class="custom-control-label" for="gift-card">Gift Card</label>
                     </div>
-                    <div class="payment-content" id="payment-2-show">
-                        <p>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras tincidunt orci ac eros volutpat maximus lacinia quis diam.
-                        </p>
+                    <div class="payment-content" id="gift-card-show">
+                        <form id="gift-card-form" action="" method="">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label for="gcnumber">Gift Card Number</label>
+                                    <input class="form-control" type="text" name="gcnumber" placeholder="Gift Card Number" >
+                                </div> 
+                                <div class="col-md-6">
+                                    <label for="gcpin">PIN</label>
+                                    <input class="form-control" type="text" name="gcpin" placeholder="GC PIN" >
+                                </div>
+                            </div>
+                            <div class="row">
+                                <a class="btn" href="#" id="btnAddGiftCard"><i class="fa "></i>Add Gift Card</a> 
+                            </div>
+                        </form>
                     </div>
+                    <div id="gclist"></div>
+                    <script id="gclist_template" type="text/template"> 
+                        GC: {{ gcnumber }} <a href="removeGC('{{gcnumber}}')">Remove </a>  <br>  
+                    </script>
                 </div>
                 <div class="payment-method">
                     <div class="custom-control custom-radio">
@@ -81,6 +114,19 @@ $(document).ready(function() {
             $('#' + checkbox_id + '-show').slideDown();
         }
     }); 
+
+    var template = $("#gclist_template").html();
+    $("#btnAddGiftCard").on('click', function() { 
+        var data = readform("#gift-card-form");
+        data.id= '12121';
+
+        console.log('gc card --'+JSON.stringify(data));
+ 
+        var text = Mustache.render(template, data);
+        console.log('gc card text--'+text);
+
+        $("#gclist").append(text); 
+    });
 });
 
 </script>

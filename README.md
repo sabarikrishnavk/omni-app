@@ -25,10 +25,15 @@ nx serve services-product
 <br>
 nx serve services-inventory
 <br>
+nx serve services-cart
+<br>
 To start an auth server with JWT : nx serve services-auth
 <br>
 nx serve gateway-ecom
 <br>
+nx serve studio-dxm-ssr
+<br>
+nx serve studio-dam
 
 
 <br>

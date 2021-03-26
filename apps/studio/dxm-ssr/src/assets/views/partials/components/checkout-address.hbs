@@ -4,7 +4,7 @@
         <div class="billing-address">
             <h2>Billing Address</h2>
             <div id="billing-address-summary"></div>
-            <form id="billing-address-form" action="" method="post">
+            <form id="billing-address-form" action="" method="">
                 <div class="row">
                     <div class="col-md-6">
                         <label for="firstname">First Name</label>
@@ -60,59 +60,62 @@
                         </div>
                     </div>
                 </div>
-                <div class="checkout">
-                    <a class="btn" href="#" id="btnAddOrderAddress"><i class="fa "></i>Continue</a> 
-                </div>
             </form>
         </div>
 
         <div class="shipping-address">
             <h2>Shipping Address</h2>
-            <div class="row">
-                <div class="col-md-6">
-                    <label>First Name</label>
-                    <input class="form-control" type="text" placeholder="First Name" value="">
+            <form id="shipping-address-form" action="" method="">
+                <div class="row">
+                    <div class="col-md-6">
+                        <label for="firstname">First Name</label>
+                        <input class="form-control" type="text" name="firstname" placeholder="First Name" >
+                    </div>
+                    <div class="col-md-6">
+                        <label for="lastname">Last Name</label>
+                        <input class="form-control" type="text" name="lastname" placeholder="Last Name" >
+                    </div>
+                    <div class="col-md-6">
+                        <label for="email">E-mail</label>
+                        <input class="form-control" type="text" name="email" placeholder="E-mail">
+                    </div>
+                    <div class="col-md-6">
+                        <label>Mobile No</label>
+                        <input class="form-control" type="text" name="mobilenumber" placeholder="Mobile No">
+                    </div>
+                    <div class="col-md-12">
+                        <label>Address</label>
+                        <input class="form-control" type="text" name="address" placeholder="Address">
+                    </div>
+                    <div class="col-md-6">
+                        <label>Country</label>
+                        <select class="custom-select" name="country">
+                            <option selected>United States</option>
+                            <option>Afghanistan</option>
+                            <option>Albania</option>
+                            <option>Algeria</option>
+                        </select>
+                    </div>
+                    <div class="col-md-6">
+                        <label>City</label>
+                        <input class="form-control" type="text" name="city" placeholder="City">
+                    </div>
+                    <div class="col-md-6">
+                        <label>State</label>
+                        <input class="form-control" type="text" name="state" placeholder="State">
+                    </div>
+                    <div class="col-md-6">
+                        <label>ZIP Code</label>
+                        <input class="form-control" type="text" name="zipcode" placeholder="ZIP Code">
+                    </div>
                 </div>
-                <div class="col-md-6">
-                    <label>Last Name"</label>
-                    <input class="form-control" type="text" placeholder="Last Name">
-                </div>
-                <div class="col-md-6">
-                    <label>E-mail</label>
-                    <input class="form-control" type="text" placeholder="E-mail">
-                </div>
-                <div class="col-md-6">
-                    <label>Mobile No</label>
-                    <input class="form-control" type="text" placeholder="Mobile No">
-                </div>
-                <div class="col-md-12">
-                    <label>Address</label>
-                    <input class="form-control" type="text" placeholder="Address">
-                </div>
-                <div class="col-md-6">
-                    <label>Country</label>
-                    <select class="custom-select">
-                        <option selected>United States</option>
-                        <option>Afghanistan</option>
-                        <option>Albania</option>
-                        <option>Algeria</option>
-                    </select>
-                </div>
-                <div class="col-md-6">
-                    <label>City</label>
-                    <input class="form-control" type="text" placeholder="City">
-                </div>
-                <div class="col-md-6">
-                    <label>State</label>
-                    <input class="form-control" type="text" placeholder="State">
-                </div>
-                <div class="col-md-6">
-                    <label>ZIP Code</label>
-                    <input class="form-control" type="text" placeholder="ZIP Code">
-                </div>
-            </div>
+            </form>
         </div>
     </div> 
+
+    <div class="checkout">
+        <a class="btn" href="#" id="btnAddOrderAddress"><i class="fa "></i>Continue</a> 
+    </div>
 </div>
 
 
@@ -168,35 +171,31 @@ $(document).ready(function() {
        
     }); 
     $("#btnAddOrderAddress").click(function(form) { 
-        
-        var frm = $("#billing-address-form"); 
-        var addrdata = frm.serializeArray(); 
+         
 
-        var billaddress = {};
+        var addresses={"billing":{} , "shipping":{}}; 
+        var billaddress = readform("#billing-address-form");  
 
-        $.each(addrdata, function() {
-            if (billaddress[this.name] !== undefined) {
-                if (!billaddress[this.name].push) {
-                    billaddress[this.name] = [billaddress[this.name]];
-                }
-                billaddress[this.name].push(this.value || '');
-            } else {
-                billaddress[this.name] = this.value || '';
-            }
-        });
-        console.log('submit Handler --'+ JSON.stringify(billaddress));
+        if($('#shipto').is(':checked')) {  
+            addresses.shipping=readform("#shipping-address-form");
+        }else{
+            addresses.shipping=billaddress; 
+        }
+        addresses.billing=billaddress;
+
+        console.log('submit address --'+ JSON.stringify(addresses));
         var cartsid = readCookie('cartsid');
         console.log('cartsid : ' + cartsid);
-        addAddress(cartsid,billaddress);
+        addAddress(cartsid,addresses);
         //form.submit();
     });
     // Shipping address show hide
     $('.checkout #shipto').change(function () {
-    if($(this).is(':checked')) {
-        $('.checkout .shipping-address').slideDown();
-    } else {
-        $('.checkout .shipping-address').slideUp();
-    }
+        if($(this).is(':checked')) {
+            $('.checkout .shipping-address').slideDown();
+        } else {
+            $('.checkout .shipping-address').slideUp();
+        }
     }); 
 });
 
